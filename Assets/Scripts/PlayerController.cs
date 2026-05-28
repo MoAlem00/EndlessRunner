@@ -5,14 +5,16 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GroundCheck groundCheck;
     [SerializeField] private float speed;
+    [SerializeField] private Animator anim;
     private Rigidbody rb;
     [SerializeField] private float laneDistance = 3f;
     private int currentLane = 1;
     [SerializeField] private float jumpForce = 5f;
     
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
     }
     
 
@@ -34,10 +36,12 @@ public class PlayerController : MonoBehaviour
     public void Jump()
     {
         if (!groundCheck.isGrounded) return;
+        anim.SetTrigger("Jump");
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
     private void MovePlayer()
     {
+        anim.SetBool("IsRunning", true);
         Vector3 moveForward = transform.forward * (speed *  Time.deltaTime);
         float targetX = (currentLane - 1) * laneDistance;
         float newX = Mathf.Lerp(rb.position.x,targetX,speed * Time.deltaTime);
