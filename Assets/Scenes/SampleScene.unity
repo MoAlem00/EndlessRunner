@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 129587125}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -388,6 +388,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 303912232}
   m_CullTransparentMesh: 1
+--- !u!1 &308528677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 308528679}
+  - component: {fileID: 308528678}
+  m_Layer: 0
+  m_Name: CollectablePooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &308528678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308528677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88eaee3d158112459e61cb3a55cc733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BasicObjectPooler
+  prefab: {fileID: 8649338742081266572, guid: f9d1e687b11956e4fb6bf4d11801584d, type: 3}
+  initialPoolSize: 20
+--- !u!4 &308528679
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308528677}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 5.07, z: -8.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1138,7 +1184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasicObjectPooler
   prefab: {fileID: 8383949111619251967, guid: eb079df9ae4d10448afa6b8e2c392dbe, type: 3}
-  initialPoolSize: 10
+  initialPoolSize: 20
 --- !u!4 &1189703858
 Transform:
   m_ObjectHideFlags: 0
@@ -1913,6 +1959,7 @@ MonoBehaviour:
   player: {fileID: 129587120}
   groundPooler: {fileID: 1842124496}
   obstaclesPooler: {fileID: 1189703857}
+  collectablesPooler: {fileID: 308528678}
   startingGroundAmount: 20
   gap: {x: 0, y: 0, z: 3}
 --- !u!4 &1803075839
@@ -2177,5 +2224,6 @@ SceneRoots:
   - {fileID: 1803075839}
   - {fileID: 1842124497}
   - {fileID: 1189703858}
+  - {fileID: 308528679}
   - {fileID: 1606122907}
   - {fileID: 1407439451}

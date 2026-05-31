@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50723f30d7a73ef4cb9595ddea1a8912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ground
-  obstaclesPosition:
+  spawnPosition:
   - {fileID: 8728014046957373945}
   - {fileID: 5617310303272937102}
   - {fileID: 1816900167811529079}

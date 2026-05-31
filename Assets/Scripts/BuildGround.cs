@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BuildGround : MonoBehaviour
 {
     [SerializeField] private Transform player;
     [SerializeField] private BasicObjectPooler groundPooler;
     [SerializeField] private BasicObjectPooler obstaclesPooler;
+    [SerializeField] private BasicObjectPooler collectablesPooler;
     [SerializeField] private int startingGroundAmount = 10;
     [SerializeField] private Vector3 gap;// = new Vector3(0, 0, 1f);
     private Vector3 startPos = new Vector3(0, 0, 0);
@@ -38,9 +40,12 @@ public class BuildGround : MonoBehaviour
         for (int i = 0; i < startingGroundAmount; i++)
         {
             GameObject ground = groundPooler.GetPooledObject();
+            Ground currentGround = ground.GetComponent<Ground>();
             ground.transform.position = startPos;
             SetNextPosition(ground.transform);
             groundObjects.Add(ground);
+            AttachNewObstacleTo(currentGround);
+            AttachNewCollectableTo(currentGround);
         }
     }
 
@@ -49,16 +54,45 @@ public class BuildGround : MonoBehaviour
         GameObject firstGround = groundObjects[0];
         Ground currentGround = firstGround.GetComponent<Ground>();
         GameObject currentObstacle = currentGround.DetachObstacle();
+        GameObject currentCollectable = currentGround.DetachCollectable();
+        collectablesPooler.ReturnObject(currentCollectable);
         obstaclesPooler.ReturnObject(currentObstacle);
         firstGround.transform.position = startPos;
         groundObjects.RemoveAt(0);
         groundObjects.Add(firstGround);
         SetNextPosition(firstGround.transform);
         AttachNewObstacleTo(currentGround);
+        AttachNewCollectableTo(currentGround);
     }
     private void AttachNewObstacleTo(Ground ground)
     {
         GameObject newObstacle = obstaclesPooler.GetPooledObject();
         ground.AttachObstacle(newObstacle);
     }
+    
+    private void AttachNewCollectableTo(Ground ground)
+    {
+        GameObject newCollectable = collectablesPooler.GetPooledObject();
+        ground.AttachCollectable(newCollectable);
+    }
+    
+    private void OnEnable()
+    {
+        Collectable.OnPickedUp += HandleCollectablePickedUp;
+    }
+
+    private void OnDisable()
+    {
+        Collectable.OnPickedUp -= HandleCollectablePickedUp;
+    }
+    private void HandleCollectablePickedUp(GameObject collectable)
+    {
+        foreach (GameObject ground in groundObjects)
+        {
+            Ground currGround = ground.GetComponent<Ground>();
+            if (currGround.TryClearCollectable(collectable)) break;
+        }
+        collectablesPooler.ReturnObject(collectable);
+    }
+    
 }
