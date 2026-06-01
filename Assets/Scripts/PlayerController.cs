@@ -42,9 +42,10 @@ public class PlayerController : MonoBehaviour
     private void MovePlayer()
     {
         anim.SetBool("IsRunning", true);
-        Vector3 moveForward = transform.forward * (speed *  Time.deltaTime);
+        float totalSpeed =  speed * Time.deltaTime * DifficultyManager.Instance.difficulty.movementSpeedMultiplier;
+        Vector3 moveForward = transform.forward * totalSpeed;
         float targetX = (currentLane - 1) * laneDistance;
-        float newX = Mathf.Lerp(rb.position.x,targetX,speed * Time.deltaTime);
+        float newX = Mathf.Lerp(rb.position.x,targetX, totalSpeed);
         Vector3 targetPosition = new Vector3(newX, rb.position.y, rb.position.z);
         rb.MovePosition(targetPosition + moveForward);
     }
