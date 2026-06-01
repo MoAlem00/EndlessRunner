@@ -6,8 +6,9 @@ using Random = UnityEngine.Random;
 public class BuildGround : MonoBehaviour
 {
     [SerializeField] private Transform player;
+    [SerializeField] private ObstaclePoolManager obstaclePoolerManager;
     [SerializeField] private BasicObjectPooler groundPooler;
-    [SerializeField] private BasicObjectPooler obstaclesPooler;
+    //[SerializeField] private BasicObjectPooler obstaclesPooler;
     [SerializeField] private BasicObjectPooler collectablesPooler;
     [SerializeField] private int startingGroundAmount = 10;
     [SerializeField] private Vector3 gap;// = new Vector3(0, 0, 1f);
@@ -56,17 +57,20 @@ public class BuildGround : MonoBehaviour
         GameObject currentObstacle = currentGround.DetachObstacle();
         GameObject currentCollectable = currentGround.DetachCollectable();
         collectablesPooler.ReturnObject(currentCollectable);
-        obstaclesPooler.ReturnObject(currentObstacle);
+        obstaclePoolerManager.Return(currentObstacle);
         firstGround.transform.position = startPos;
         groundObjects.RemoveAt(0);
         groundObjects.Add(firstGround);
         SetNextPosition(firstGround.transform);
-        AttachNewObstacleTo(currentGround);
+        if (Random.value < DifficultyManager.Instance.difficulty.spawnRate)
+            AttachNewObstacleTo(currentGround);
         AttachNewCollectableTo(currentGround);
     }
     private void AttachNewObstacleTo(Ground ground)
     {
-        GameObject newObstacle = obstaclesPooler.GetPooledObject();
+        var list = DifficultyManager.Instance.difficulty.ObstacleTypes;
+        GameObject chosen = list[Random.Range(0, list.Length)];
+        GameObject newObstacle = obstaclePoolerManager.Get(chosen);
         ground.AttachObstacle(newObstacle);
     }
     

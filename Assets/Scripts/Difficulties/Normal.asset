@@ -12,3 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2bcd03bbfcf274c9fd3f5ed31f6b18, type: 3}
   m_Name: Normal
   m_EditorClassIdentifier: Assembly-CSharp::DifficultySciptableObject
+  spawnRate: 0.5
+  movementSpeedMultiplier: 1.2
+  maxObstacles: 20
+  ObstacleTypes:
+  - {fileID: 8383949111619251967, guid: eb079df9ae4d10448afa6b8e2c392dbe, type: 3}
+  - {fileID: 2080719412400346052, guid: a2df5a43afd3c3e44bd106f135e4311c, type: 3}

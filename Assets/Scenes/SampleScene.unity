@@ -255,6 +255,52 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &153578076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 153578078}
+  - component: {fileID: 153578077}
+  m_Layer: 0
+  m_Name: HardObstaclesPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &153578077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153578076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88eaee3d158112459e61cb3a55cc733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BasicObjectPooler
+  prefab: {fileID: 2731793694452579129, guid: 0c6fa6e6d53b9b44f968c1659594c57e, type: 3}
+  initialPoolSize: 20
+--- !u!4 &153578078
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153578076}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.85527, y: -9.17982, z: 20.95095}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &303912232
 GameObject:
   m_ObjectHideFlags: 0
@@ -1219,6 +1265,55 @@ MonoBehaviour:
   - type: 2
     difficulty: {fileID: 11400000, guid: 024d4cb2bd3f5a64ba677cd040e413c0, type: 2}
   selectedDifficulty: -1
+  difficulty: {fileID: 11400000, guid: f7269d941076a7944b97e29386e04e40, type: 2}
+--- !u!1 &999664166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 999664168}
+  - component: {fileID: 999664167}
+  m_Layer: 0
+  m_Name: ObstaclePoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &999664167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999664166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc356a907a64a14b9677730050736fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObstaclePoolManager
+  obstaclePoolers:
+  - {fileID: 1189703857}
+  - {fileID: 1513853307}
+  - {fileID: 153578077}
+--- !u!4 &999664168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999664166}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.84173, y: 3.75929, z: 13.92306}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1189703856
 GameObject:
   m_ObjectHideFlags: 0
@@ -1230,7 +1325,7 @@ GameObject:
   - component: {fileID: 1189703858}
   - component: {fileID: 1189703857}
   m_Layer: 0
-  m_Name: ObstaclesPooler
+  m_Name: EasyObstaclesPooler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1617,6 +1712,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0f0f431fba6592e46955143651f821cc, type: 3}
   m_PrefabInstance: {fileID: 1819621741}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1513853306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1513853308}
+  - component: {fileID: 1513853307}
+  m_Layer: 0
+  m_Name: NormalObstaclesPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1513853307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513853306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88eaee3d158112459e61cb3a55cc733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BasicObjectPooler
+  prefab: {fileID: 2080719412400346052, guid: a2df5a43afd3c3e44bd106f135e4311c, type: 3}
+  initialPoolSize: 20
+--- !u!4 &1513853308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513853306}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.85527, y: -9.17982, z: 20.95095}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1514113553
 GameObject:
   m_ObjectHideFlags: 0
@@ -2022,8 +2163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildGround
   player: {fileID: 129587120}
+  obstaclePoolerManager: {fileID: 999664167}
   groundPooler: {fileID: 1842124496}
-  obstaclesPooler: {fileID: 1189703857}
   collectablesPooler: {fileID: 308528678}
   startingGroundAmount: 20
   gap: {x: 0, y: 0, z: 3}
@@ -2288,7 +2429,10 @@ SceneRoots:
   - {fileID: 129587120}
   - {fileID: 1803075839}
   - {fileID: 1842124497}
+  - {fileID: 999664168}
   - {fileID: 1189703858}
+  - {fileID: 1513853308}
+  - {fileID: 153578078}
   - {fileID: 308528679}
   - {fileID: 1606122907}
   - {fileID: 1407439451}

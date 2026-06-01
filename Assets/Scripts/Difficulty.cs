@@ -9,4 +9,6 @@ public class Difficulty : ScriptableObject
     public float movementSpeedMultiplier = 1;
     [Tooltip("The maximum amount of obstacles allowed at a time.")]
     public int maxObstacles = 20;
+    [Tooltip("Obstacle Types Per Difficulty")]
+    public GameObject[] ObstacleTypes;
 }
