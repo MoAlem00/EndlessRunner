@@ -8,12 +8,10 @@ public class BuildGround : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private ObstaclePoolManager obstaclePoolerManager;
     [SerializeField] private BasicObjectPooler groundPooler;
-    //[SerializeField] private BasicObjectPooler obstaclesPooler;
     [SerializeField] private BasicObjectPooler collectablesPooler;
-    [SerializeField] private int startingGroundAmount = 10;
-    [SerializeField] private Vector3 gap;// = new Vector3(0, 0, 1f);
+    [SerializeField] private int startingGroundAmount = 5;
+    [SerializeField] private Vector3 gap;
     private Vector3 startPos = new Vector3(0, 0, 0);
-    
     private List<GameObject> groundObjects = new List<GameObject>();
     
     void Start()
@@ -45,8 +43,8 @@ public class BuildGround : MonoBehaviour
             ground.transform.position = startPos;
             SetNextPosition(ground.transform);
             groundObjects.Add(ground);
-            AttachNewObstacleTo(currentGround);
-            AttachNewCollectableTo(currentGround);
+            //AttachNewObstacleTo(currentGround);
+            //AttachNewCollectableTo(currentGround);
         }
     }
 
@@ -83,11 +81,13 @@ public class BuildGround : MonoBehaviour
     private void OnEnable()
     {
         Collectable.OnPickedUp += HandleCollectablePickedUp;
+        PlayerController.OnHitObstacle += HandleObstacleHit;
     }
 
     private void OnDisable()
     {
         Collectable.OnPickedUp -= HandleCollectablePickedUp;
+        PlayerController.OnHitObstacle -= HandleObstacleHit;
     }
     private void HandleCollectablePickedUp(GameObject collectable)
     {
@@ -97,6 +97,16 @@ public class BuildGround : MonoBehaviour
             if (currGround.TryClearCollectable(collectable)) break;
         }
         collectablesPooler.ReturnObject(collectable);
+    }
+
+    private void HandleObstacleHit(GameObject obstacle)
+    {
+        foreach (GameObject ground in groundObjects)
+        {
+            Ground currGround = ground.GetComponent<Ground>();
+            if (currGround.TryClearObstacle(obstacle)) break;
+        }
+        obstaclePoolerManager.Return(obstacle);
     }
     
 }

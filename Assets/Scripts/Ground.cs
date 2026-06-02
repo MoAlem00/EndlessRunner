@@ -47,4 +47,11 @@ public class Ground : MonoBehaviour
         return true;
     }
     
+    public bool TryClearObstacle(GameObject obstacle)
+    {
+        if (currentCollectable != obstacle) return false;
+        currentObstacle = null;
+        return true;
+    }
+    
 }

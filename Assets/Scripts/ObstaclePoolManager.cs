@@ -10,7 +10,8 @@ public class ObstaclePoolManager : MonoBehaviour
     void Awake()
     {
         poolForPrefab = new Dictionary<GameObject, BasicObjectPooler>();
-        foreach (var p in obstaclePoolers) poolForPrefab[p.prefab] = p;
+        foreach (var p in obstaclePoolers) 
+            poolForPrefab[p.prefab] = p;
     }
 
     public GameObject Get(GameObject prefab)
