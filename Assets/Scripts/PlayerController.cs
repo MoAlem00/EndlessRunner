@@ -65,6 +65,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleDeath()
     {
+        StartCoroutine(GameManager.Instance.ShowGameOverAfterDelay());
+        jumpForce = 0;
         speed = 0;
         isDead = true;
         anim.SetBool("IsRunning", false);

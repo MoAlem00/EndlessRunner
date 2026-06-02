@@ -11,9 +11,10 @@ public class Score : MonoBehaviour
     private float timeSinceStart = 0;
     private int coinsScore = 0;
     private float startTime;
-    
+    private bool stopTimeScore = false;
+
     public int CurrentScore => currentScore;
-    
+    public float TimeSinceStart => timeSinceStart;
     public event Action<int> OnScoreChanged;
 
     private void Awake()
@@ -27,10 +28,12 @@ public class Score : MonoBehaviour
     private void Start()
     {
         startTime = Time.time;
+        Health.Instance.OnDeath += () => stopTimeScore = true;
     }
 
     private void Update()
     {
+        if (stopTimeScore) return;
         timeSinceStart =  Time.time - startTime;
         int total = coinsScore + Mathf.FloorToInt(DistanceTracker.Instance.GetDistance() * distanceFactor) + Mathf.FloorToInt(timeSinceStart * timeFactor);
 

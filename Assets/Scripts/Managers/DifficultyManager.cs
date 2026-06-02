@@ -45,6 +45,8 @@ public class DifficultyManager : MonoBehaviour
     }
 
     public void SetDifficulty(DifficultyType type) => ApplyDifficulty(map[type]);
+    
+    public void SelectDifficulty(int type) => SetDifficulty((DifficultyType)type);
     private void ApplyDifficulty(Difficulty difficulty)
     {
         this.difficulty = difficulty;
