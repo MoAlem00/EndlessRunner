@@ -43,8 +43,11 @@ public class BuildGround : MonoBehaviour
             ground.transform.position = startPos;
             SetNextPosition(ground.transform);
             groundObjects.Add(ground);
-            //AttachNewObstacleTo(currentGround);
-            //AttachNewCollectableTo(currentGround);
+            if (i > startingGroundAmount / 2)
+            {
+                AttachNewObstacleTo(currentGround);
+                AttachNewCollectableTo(currentGround);
+            }
         }
     }
 
@@ -60,7 +63,7 @@ public class BuildGround : MonoBehaviour
         groundObjects.RemoveAt(0);
         groundObjects.Add(firstGround);
         SetNextPosition(firstGround.transform);
-        if (Random.value < DifficultyManager.Instance.difficulty.spawnRate)
+        if (Random.value <= DifficultyManager.Instance.difficulty.spawnRate)
             AttachNewObstacleTo(currentGround);
         AttachNewCollectableTo(currentGround);
     }

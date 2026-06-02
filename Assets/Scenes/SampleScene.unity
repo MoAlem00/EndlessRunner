@@ -2813,7 +2813,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 3.920044, y: -48.30005}
+  m_AnchoredPosition: {x: 3.9199219, y: -48.30005}
   m_SizeDelta: {x: 409.7, y: 65.1}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &823274255
@@ -3332,10 +3332,14 @@ MonoBehaviour:
   entries:
   - type: 0
     difficulty: {fileID: 11400000, guid: f7269d941076a7944b97e29386e04e40, type: 2}
+    startDistance: 0
   - type: 1
     difficulty: {fileID: 11400000, guid: b6a5142ff39851d44bf7fb9ddbea1cb7, type: 2}
+    startDistance: 500
   - type: 2
     difficulty: {fileID: 11400000, guid: 024d4cb2bd3f5a64ba677cd040e413c0, type: 2}
+    startDistance: 1000
+  chosenType: 0
   selectedDifficulty: -1
   difficulty: {fileID: 11400000, guid: f7269d941076a7944b97e29386e04e40, type: 2}
 --- !u!1 &999664166
