@@ -19,6 +19,7 @@ public class BuildGround : MonoBehaviour
         if(player == null)
             player = GameObject.FindGameObjectWithTag("Player").transform;
         gap = groundPooler.GetPooledObjectScaleZ();
+        Debug.Log(gap);
         BuildStartingGround();
     }
 
