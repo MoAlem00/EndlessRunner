@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     private float stumbleSpeed;
     private float normalSpeed;
     private bool isInvulnerable = false;
+    private bool wasGrounded;
+    [SerializeField] AudioClip concreteHitSound;
+    [SerializeField] AudioClip landingSound;
     public static event Action<GameObject> OnHitObstacle; 
     
     void Awake()
@@ -29,6 +32,15 @@ public class PlayerController : MonoBehaviour
         Health.Instance.OnDeath += HandleDeath;
         stumbleSpeed = speed / 2;
         normalSpeed = speed;
+    }
+
+    private void Update()
+    {
+        if (!wasGrounded && groundCheck.isGrounded)
+        {
+            AudioManager.Instance.PlaySfx(landingSound);
+        }
+        wasGrounded = groundCheck.isGrounded;
     }
 
     private void FixedUpdate()
@@ -101,6 +113,7 @@ public class PlayerController : MonoBehaviour
             effect.transform.position = other.transform.position;
             effect.GetComponent<ReturnEffectToPool>().pool = effectPooler; 
             effect.GetComponent<ParticleSystem>().Play();
+            AudioManager.Instance.PlaySfx(concreteHitSound,0.5f);
             StartCoroutine(HandleObstacleHit());
         }
     }

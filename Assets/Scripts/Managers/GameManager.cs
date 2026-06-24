@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(AudioManager.Instance.PlayShuffleMusic());
         gameState = GameState.MainMenu;
         Time.timeScale = 0f;
     }

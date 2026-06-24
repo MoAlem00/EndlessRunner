@@ -1,10 +1,12 @@
+using System.Collections;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
-    AudioSource sfxSource;
-    AudioSource musicSource;
+    [SerializeField] private AudioClip[] gameMusic;
+    [SerializeField] AudioSource sfxSource;
+    [SerializeField] AudioSource musicSource;
     
     private void Awake()
     {
@@ -16,9 +18,10 @@ public class AudioManager : MonoBehaviour
         else Destroy(this);
     }
 
-    public void PlaySfx(AudioClip clip)
+    public void PlaySfx(AudioClip clip, float volume = 1f)
     {
-        if(clip == null) return;   
+        if(clip == null) return;
+        sfxSource.volume = volume;
         sfxSource.PlayOneShot(clip);
     }
 
@@ -28,5 +31,16 @@ public class AudioManager : MonoBehaviour
         musicSource.clip = clip;
         musicSource.loop = true;
         musicSource.Play();
+    }
+    
+    public IEnumerator PlayShuffleMusic()
+    {
+        if (gameMusic == null || gameMusic.Length == 0) yield break; 
+        while (true)
+        {
+            int random = Random.Range(0, gameMusic.Length);
+            PlayMusic(gameMusic[random]);
+            yield return new WaitForSeconds(gameMusic[random].length);
+        }
     }
 }
