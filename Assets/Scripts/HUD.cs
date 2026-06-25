@@ -8,6 +8,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private Image[] hearts;
     [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject optionsMenu;
     [SerializeField] private TMP_Text finalScoreText;
     [SerializeField] private TMP_Text totalTimeText;
 
@@ -47,4 +48,5 @@ public class HUD : MonoBehaviour
         }
         mainMenu.SetActive(state == GameState.MainMenu);
     }
+    
 }
