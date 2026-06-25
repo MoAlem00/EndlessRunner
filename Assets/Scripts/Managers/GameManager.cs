@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(AudioManager.Instance.PlayShuffleMusic());
         gameState = GameState.MainMenu;
-        Time.timeScale = 0f;
     }
 
     private void SetState(GameState newState)
@@ -31,7 +30,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         SetState(GameState.Playing);
-        Time.timeScale = 1f;
+        Score.Instance.startTime = Time.time;
     }
     public IEnumerator ShowGameOverAfterDelay()
     {
@@ -53,15 +52,8 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void ResumeGame()
+    public bool IsPlaying()
     {
-        SetState(GameState.Playing);
-        Time.timeScale = 1f;
-    }
-    
-    public void PauseGame()
-    {
-        SetState(GameState.Paused);
-        Time.timeScale = 0f;
+        return gameState == GameState.Playing;
     }
 }
