@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         gameState = GameState.MainMenu;
-        Time.timeScale = 0f;
     }
 
     private void SetState(GameState newState)
@@ -30,7 +29,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         SetState(GameState.Playing);
-        Time.timeScale = 1f;
+        Score.Instance.startTime = Time.time;
     }
     public IEnumerator ShowGameOverAfterDelay()
     {
@@ -50,5 +49,10 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public bool IsPlaying()
+    {
+        return gameState == GameState.Playing;
     }
 }
