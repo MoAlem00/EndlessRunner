@@ -17,6 +17,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private Button pauseButton;
     [SerializeField] private TMP_Text distanceText;
 
+
     void Start()
     {
         Score.Instance.OnCoinsChanged += UpdateCoins;
@@ -59,6 +60,7 @@ public class HUD : MonoBehaviour
     {
         distanceText.text = "" + Mathf.FloorToInt(DistanceTracker.Instance.GetDistance()) + " m";
     }
+    
 
     void HandleStateChanged(GameState state)
     {
