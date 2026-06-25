@@ -10,12 +10,15 @@ public class Score : MonoBehaviour
     private float timeFactor = 1.1f;
     private float timeSinceStart = 0;
     private int coinsScore = 0;
+    public int coinsCollected = 0;
     private float startTime;
     private bool stopTimeScore = false;
 
+    public int CoinsCollected => coinsCollected;
     public int CurrentScore => currentScore;
     public float TimeSinceStart => timeSinceStart;
     public event Action<int> OnScoreChanged;
+    public event Action<int> OnCoinsChanged;
 
     private void Awake()
     {
@@ -49,9 +52,16 @@ public class Score : MonoBehaviour
         coinsScore += scoreToAdd;
     }
 
+    public void CollectCoin()
+    {
+        coinsCollected++;
+        OnCoinsChanged?.Invoke(coinsCollected);
+    }
+
     public void ResetScore()
     {
         coinsScore = 0;
+        coinsCollected = 0;
         startTime = Time.time;
         DistanceTracker.Instance.ResetDistance();
     }

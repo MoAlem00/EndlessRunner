@@ -52,4 +52,16 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    public void ResumeGame()
+    {
+        SetState(GameState.Playing);
+        Time.timeScale = 1f;
+    }
+    
+    public void PauseGame()
+    {
+        SetState(GameState.Paused);
+        Time.timeScale = 0f;
+    }
 }

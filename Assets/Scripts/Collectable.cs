@@ -11,6 +11,7 @@ public class Collectable : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Score.Instance.AddScore(value);
+            Score.Instance.CollectCoin();
             AudioManager.Instance.PlaySfx(collectSound);
             OnPickedUp?.Invoke(gameObject);
             Debug.Log("Item Collected");
