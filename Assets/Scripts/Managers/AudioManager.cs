@@ -55,7 +55,7 @@ public class AudioManager : MonoBehaviour
         {
             int random = Random.Range(0, gameMusic.Length);
             PlayMusic(gameMusic[random]);
-            yield return new WaitForSeconds(gameMusic[random].length);
+            yield return new WaitWhile(() => musicSource.isPlaying);
         }
     }
     
