@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem.EnhancedTouch;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,7 +22,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioClip concreteHitSound;
     [SerializeField] AudioClip landingSound;
     public static event Action<GameObject> OnHitObstacle; 
-    
+    /// <summary>Percentage of the screen width to consider when swiping to be considered a swipe, else its a jump.</summary> 
+    const float X_SWIPE_DEAD_ZONE_PERCENTAGE = 0.05f;
+    /// <summary> If True, validate touches. </summary>
+    private bool touchStartedInGame;
+    private Vector2 startTouchPosition, endTouchPosition;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -34,17 +40,66 @@ public class PlayerController : MonoBehaviour
         normalSpeed = speed;
     }
 
-    private void Update()
+
+private void OnEnable()
+{
+    EnhancedTouchSupport.Enable();
+#if UNITY_EDITOR
+    TouchSimulation.Enable();
+#endif
+}
+
+private void OnDisable()
+{
+#if UNITY_EDITOR
+    TouchSimulation.Disable();
+#endif
+    EnhancedTouchSupport.Disable();
+}
+
+
+
+private void Update()
+{
+    if (!wasGrounded && groundCheck.isGrounded)
     {
-        if (!wasGrounded && groundCheck.isGrounded)
-        {
-            AudioManager.Instance.PlaySfx(landingSound);
-        }
-        wasGrounded = groundCheck.isGrounded;
+        AudioManager.Instance.PlaySfx(landingSound);
     }
+    wasGrounded = groundCheck.isGrounded;
+    foreach (var touch in Touch.activeTouches)
+    {
+        if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
+        {
+            if (!GameManager.Instance.IsPlaying()) continue;
+
+            touchStartedInGame = true;
+            startTouchPosition = touch.screenPosition;
+        }
+
+        if (touch.phase == UnityEngine.InputSystem.TouchPhase.Ended)
+        {
+            if (!touchStartedInGame) continue;
+
+            touchStartedInGame = false;
+
+            endTouchPosition = touch.screenPosition;
+
+            float deadZone = Screen.width * X_SWIPE_DEAD_ZONE_PERCENTAGE;
+            float distance = Mathf.Abs(endTouchPosition.x - startTouchPosition.x);
+
+            if (distance <= deadZone)
+                Jump();
+            else if (endTouchPosition.x < startTouchPosition.x)
+                MoveLeft();
+            else
+                MoveRight();
+        }
+    }
+}
 
     private void FixedUpdate()
     {
+        if(!GameManager.Instance.IsPlaying()) return;
         MovePlayer();
     }
 
