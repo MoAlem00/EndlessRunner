@@ -4,10 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum GameState { MainMenu, GameOver, Paused, Playing }
+public enum ControlMode { Swipe, Joystick }
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameState gameState { get; private set; }
+    public ControlMode controlMode;
     public event Action<GameState> OnStateChanged;
 
     private void Awake()
