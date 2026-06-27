@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum GameState { MainMenu, GameOver, Paused, Playing }
+/// <summary>
+/// To-Do maybe implemnet? its not part of the assingment
+/// </summary>
 public enum ControlMode { Swipe, Joystick }
 public class GameManager : MonoBehaviour
 {
