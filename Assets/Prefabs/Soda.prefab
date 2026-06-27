@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Collectable
   value: 5000
+  effects: 00000000
   makeInvulnerable: 1
   makeMagnetic: 0
 --- !u!114 &-2736515411632402601

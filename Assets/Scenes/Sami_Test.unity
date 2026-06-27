@@ -440,13 +440,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 264150672}
   - {fileID: 1842124497}
-  - {fileID: 999664168}
+  - {fileID: 308528679}
+  - {fileID: 1086951900}
   - {fileID: 1265027334}
   - {fileID: 1189703858}
   - {fileID: 1513853308}
   - {fileID: 153578078}
-  - {fileID: 308528679}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &98986514
@@ -598,6 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf5f4df44a60774b831bac2d9773b2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Score
+  startTime: 0
 --- !u!1 &129587116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,6 +1079,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173210354}
   m_CullTransparentMesh: 1
+--- !u!1 &264150671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 264150672}
+  m_Layer: 0
+  m_Name: PoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &264150672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264150671}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 999664168}
+  - {fileID: 1362780622}
+  m_Father: {fileID: 92863315}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &303912232
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,7 +1256,7 @@ GameObject:
   - component: {fileID: 308528679}
   - component: {fileID: 308528678}
   m_Layer: 0
-  m_Name: CollectablePooler
+  m_Name: CoinPooler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3302,6 +3337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b2615d27b7d33a4a8107242a228fcd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  controlMode: 0
 --- !u!4 &964297363
 Transform:
   m_ObjectHideFlags: 0
@@ -3388,7 +3424,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 92863315}
+  m_Father: {fileID: 264150672}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1031770690
 GameObject:
@@ -3664,6 +3700,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1056262464}
   m_CullTransparentMesh: 1
+--- !u!1 &1086951899
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1086951900}
+  - component: {fileID: 1086951901}
+  m_Layer: 0
+  m_Name: SodaPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1086951900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086951899}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 92863315}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1086951901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086951899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88eaee3d158112459e61cb3a55cc733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BasicObjectPooler
+  prefab: {fileID: 8423267239095302013, guid: a9648db2a478beb478a3905ec98c7f67, type: 3}
+  initialPoolSize: 4
 --- !u!1 &1189703856
 GameObject:
   m_ObjectHideFlags: 0
@@ -4427,6 +4509,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 129587120}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1362780621
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1362780622}
+  - component: {fileID: 1362780623}
+  m_Layer: 0
+  m_Name: CollectablePoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1362780622
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362780621}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 264150672}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1362780623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362780621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e32c2391488049e4e993da32aa78c5b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArrayObjectPooler
+  poolers:
+  - {fileID: 308528678}
+  - {fileID: 1086951901}
 --- !u!1 &1407439448
 GameObject:
   m_ObjectHideFlags: 0
@@ -5418,7 +5547,7 @@ MonoBehaviour:
   player: {fileID: 129587120}
   obstaclePoolerManager: {fileID: 999664167}
   groundPooler: {fileID: 1842124496}
-  collectablesPooler: {fileID: 308528678}
+  collectablesPooler: {fileID: 1362780623}
   startingGroundAmount: 10
   gap: {x: 0, y: 0, z: 3}
 --- !u!4 &1803075839
