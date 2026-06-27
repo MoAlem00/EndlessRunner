@@ -8,7 +8,7 @@ public class BuildGround : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private ObstaclePoolManager obstaclePoolerManager;
     [SerializeField] private BasicObjectPooler groundPooler;
-    [SerializeField] private BasicObjectPooler collectablesPooler;
+    [SerializeField] private ArrayObjectPooler collectablesPooler;
     [SerializeField] private int startingGroundAmount = 5;
     [SerializeField] private Vector3 gap;
     private Vector3 startPos = new Vector3(0, 0, 0);
@@ -58,7 +58,7 @@ public class BuildGround : MonoBehaviour
         Ground currentGround = firstGround.GetComponent<Ground>();
         GameObject currentObstacle = currentGround.DetachObstacle();
         GameObject currentCollectable = currentGround.DetachCollectable();
-        collectablesPooler.ReturnObject(currentCollectable);
+        collectablesPooler.Return(currentCollectable);
         obstaclePoolerManager.Return(currentObstacle);
         firstGround.transform.position = startPos;
         groundObjects.RemoveAt(0);
@@ -78,7 +78,7 @@ public class BuildGround : MonoBehaviour
     
     private void AttachNewCollectableTo(Ground ground)
     {
-        GameObject newCollectable = collectablesPooler.GetPooledObject();
+        GameObject newCollectable = collectablesPooler.GetWeightedRandom();
         ground.AttachCollectable(newCollectable);
     }
     
@@ -100,7 +100,7 @@ public class BuildGround : MonoBehaviour
             Ground currGround = ground.GetComponent<Ground>();
             if (currGround.TryClearCollectable(collectable)) break;
         }
-        collectablesPooler.ReturnObject(collectable);
+        collectablesPooler.Return(collectable);
     }
 
     private void HandleObstacleHit(GameObject obstacle)
