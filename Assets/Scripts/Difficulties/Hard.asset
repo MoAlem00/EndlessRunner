@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Hard
   m_EditorClassIdentifier: Assembly-CSharp::DifficultySciptableObject
   spawnRate: 1
-  movementSpeedMultiplier: 2
+  movementSpeedMultiplier: 3
   maxObstacles: 20
   ObstacleTypes:
   - {fileID: 8383949111619251967, guid: eb079df9ae4d10448afa6b8e2c392dbe, type: 3}
   - {fileID: 2080719412400346052, guid: a2df5a43afd3c3e44bd106f135e4311c, type: 3}
   - {fileID: 2731793694452579129, guid: 0c6fa6e6d53b9b44f968c1659594c57e, type: 3}
+  powerUpChance: 0
+  powerUps: []
