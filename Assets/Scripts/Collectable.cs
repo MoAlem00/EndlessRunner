@@ -4,7 +4,7 @@ public class Collectable : MonoBehaviour
 {
     [SerializeField] private int value = 100;
     [SerializeField] private AudioClip collectSound;
-    [SerializeField] private PowerUp powerup; 
+    [SerializeField] private PowerUp powerUp; 
     [SerializeField] private float buffDuration = 10.0f;
     public static event Action<GameObject> OnPickedUp; 
     private void OnTriggerEnter(Collider other)
@@ -27,7 +27,6 @@ public class Collectable : MonoBehaviour
             Score.Instance.CollectCoin(multiplier);
             AudioManager.Instance.PlaySfx(collectSound);
             OnPickedUp?.Invoke(gameObject);
-            Score.Instance.AddScore(value);
-            foreach(PowerUpType e in powerup.effects) pc.AddEffect(e, buffDuration);            
+            foreach(PowerUpType e in powerUp.effects) pc.AddEffect(e, buffDuration);            
     }
 }

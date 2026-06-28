@@ -5,6 +5,7 @@ public class Ground : MonoBehaviour
     [SerializeField] private Transform[] spawnPosition;
     private GameObject currentObstacle;
     private GameObject currentCollectable;
+    private GameObject currentPowerUp;
     private Vector3 collectableOffset = new Vector3(0f, 1f, 0f);
     private int spawnedIndex;
 
@@ -51,6 +52,28 @@ public class Ground : MonoBehaviour
     {
         if (currentCollectable != obstacle) return false;
         currentObstacle = null;
+        return true;
+    }
+    
+    public void AttachPowerUp(GameObject powerUp)
+    {
+        if (powerUp == null || currentPowerUp != null) return;
+        int offset = Random.Range(1, spawnPosition.Length);
+        int random = (spawnedIndex + offset) % spawnPosition.Length;
+        currentPowerUp = powerUp;
+        powerUp.transform.position = spawnPosition[random].position;
+    }
+    
+    public GameObject DetachPowerUp()
+    {
+        GameObject returnedPowerUp = currentPowerUp;
+        currentPowerUp = null;
+        return returnedPowerUp;
+    }
+    public bool TryClearPowerUp(GameObject powerUp)
+    {
+        if (currentPowerUp != powerUp) return false;
+        currentPowerUp = null;
         return true;
     }
     

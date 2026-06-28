@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4464362907752003015}
   - component: {fileID: 8732770446873552662}
   - component: {fileID: 3130445133082761561}
-  - component: {fileID: -3610210453227039934}
+  - component: {fileID: 8198141473277315615}
   m_Layer: 0
   m_Name: x2Multiplier
   m_TagString: Untagged
@@ -113,7 +113,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 3.617738
   m_Center: {x: 0.00000047683716, y: 0, z: 0.00000020861626}
---- !u!114 &-3610210453227039934
+--- !u!114 &8198141473277315615
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,10 +122,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5452406791097415053}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 128d328bc71705c478c5187b33b4115a, type: 3}
+  m_Script: {fileID: 11500000, guid: cc925a9f809847d47ba630d1509897cd, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Collectable
-  value: 100
+  m_EditorClassIdentifier: Assembly-CSharp::PowerUpItem
+  value: 200
   collectSound: {fileID: 8300000, guid: 10a46902cc4787547a178805084b5cd7, type: 3}
-  powerup: {fileID: 11400000, guid: f1d5bdca32abf4040b37826c4a45f3ea, type: 2}
-  buffDuration: 10
+  powerUp: {fileID: 11400000, guid: f1d5bdca32abf4040b37826c4a45f3ea, type: 2}

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6841806325465296934}
   - component: {fileID: 444267594482684507}
   - component: {fileID: 3689716519880521696}
-  - component: {fileID: 7888320544806235907}
   - component: {fileID: -2736515411632402601}
+  - component: {fileID: -409509994191112189}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -114,21 +114,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.4
   m_Center: {x: 0, y: 0.8, z: 0}
---- !u!114 &7888320544806235907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8423267239095302013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 128d328bc71705c478c5187b33b4115a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Collectable
-  value: 100
-  makeInvulnerable: 0
-  makeMagnetic: 0
 --- !u!114 &-2736515411632402601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,3 +127,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RotateCoin
   speed: 60
+--- !u!114 &-409509994191112189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8423267239095302013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c4fc1d85dd789d4495c3c6be09abddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Coin
+  value: 100
+  collectSound: {fileID: 8300000, guid: 10a46902cc4787547a178805084b5cd7, type: 3}

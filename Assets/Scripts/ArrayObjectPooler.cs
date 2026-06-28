@@ -33,7 +33,7 @@ public class ArrayObjectPooler : MonoBehaviour
         }
     }
 
-    public GameObject GetWeightedRandom()
+    /*public GameObject GetWeightedRandom()
     {
         int totalWeight = 0;
 
@@ -57,5 +57,22 @@ public class ArrayObjectPooler : MonoBehaviour
         GameObject fallback = poolers[^1].GetPooledObject();
         poolForActiveObject[fallback] = poolers[^1];
         return fallback;
+    }*/
+
+    public PowerUp PickWeightedPowerUp()
+    {
+        var spawns = DifficultyManager.Instance.difficulty.powerUps;
+
+        float total = 0f;
+        foreach (var s in spawns) total += s.weight;
+
+        float roll = Random.Range(0f, total);
+
+        foreach (var s in spawns)
+        {
+            roll -= s.weight;
+            if (roll <= 0f) return s.powerUp;
+        }
+        return spawns[spawns.Length - 1].powerUp;
     }
 }

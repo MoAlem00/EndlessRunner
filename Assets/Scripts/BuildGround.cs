@@ -8,7 +8,8 @@ public class BuildGround : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private ObstaclePoolManager obstaclePoolerManager;
     [SerializeField] private BasicObjectPooler groundPooler;
-    [SerializeField] private ArrayObjectPooler collectablesPooler;
+    [SerializeField] private BasicObjectPooler coinsPooler;
+    [SerializeField] private ArrayObjectPooler powerUpsPooler;
     [SerializeField] private int startingGroundAmount = 5;
     [SerializeField] private Vector3 gap;
     private Vector3 startPos = new Vector3(0, 0, 0);
@@ -58,14 +59,18 @@ public class BuildGround : MonoBehaviour
         Ground currentGround = firstGround.GetComponent<Ground>();
         GameObject currentObstacle = currentGround.DetachObstacle();
         GameObject currentCollectable = currentGround.DetachCollectable();
-        collectablesPooler.Return(currentCollectable);
+        GameObject currentPowerUp = currentGround.DetachPowerUp();
+        coinsPooler.ReturnObject(currentCollectable);
         obstaclePoolerManager.Return(currentObstacle);
+        powerUpsPooler.Return(currentPowerUp);
         firstGround.transform.position = startPos;
         groundObjects.RemoveAt(0);
         groundObjects.Add(firstGround);
         SetNextPosition(firstGround.transform);
         if (Random.value <= DifficultyManager.Instance.difficulty.spawnRate)
             AttachNewObstacleTo(currentGround);
+        if (Random.value <= DifficultyManager.Instance.difficulty.powerUpChance)
+            AttachNewPowerUpTo(currentGround);
         AttachNewCollectableTo(currentGround);
     }
     private void AttachNewObstacleTo(Ground ground)
@@ -78,19 +83,27 @@ public class BuildGround : MonoBehaviour
     
     private void AttachNewCollectableTo(Ground ground)
     {
-        GameObject newCollectable = collectablesPooler.GetWeightedRandom();
+        GameObject newCollectable = coinsPooler.GetPooledObject();
         ground.AttachCollectable(newCollectable);
+    }
+    private void AttachNewPowerUpTo(Ground ground)
+    {
+        PowerUp chosen = powerUpsPooler.PickWeightedPowerUp();
+        GameObject newPowerUp = powerUpsPooler.Get(chosen.prefab);
+        ground.AttachPowerUp(newPowerUp);
     }
     
     private void OnEnable()
     {
-        Collectable.OnPickedUp += HandleCollectablePickedUp;
+        Coin.OnPickedUp += HandleCollectablePickedUp;
+        PowerUpItem.OnPickedUp += HandleCollectablePickedUp;
         PlayerController.OnHitObstacle += HandleObstacleHit;
     }
 
     private void OnDisable()
     {
-        Collectable.OnPickedUp -= HandleCollectablePickedUp;
+        Coin.OnPickedUp -= HandleCollectablePickedUp;
+        PowerUpItem.OnPickedUp -= HandleCollectablePickedUp;
         PlayerController.OnHitObstacle -= HandleObstacleHit;
     }
     private void HandleCollectablePickedUp(GameObject collectable)
@@ -98,9 +111,18 @@ public class BuildGround : MonoBehaviour
         foreach (GameObject ground in groundObjects)
         {
             Ground currGround = ground.GetComponent<Ground>();
-            if (currGround.TryClearCollectable(collectable)) break;
+            if (currGround.TryClearCollectable(collectable))
+            {
+                coinsPooler.ReturnObject(collectable);
+                return;
+            }
+
+            if (currGround.TryClearPowerUp(collectable))
+            {
+                powerUpsPooler.Return(collectable);
+                return;
+            }
         }
-        collectablesPooler.Return(collectable);
     }
 
     private void HandleObstacleHit(GameObject obstacle)

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3375815883506119277}
   - component: {fileID: 2987841331270313401}
   - component: {fileID: 3409302318251231864}
-  - component: {fileID: 8199522617245628451}
+  - component: {fileID: -8533617965811129132}
   m_Layer: 0
   m_Name: Magnet
   m_TagString: Untagged
@@ -114,7 +114,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.010457747
   m_Center: {x: 0, y: 0.006742957, z: 0}
---- !u!114 &8199522617245628451
+--- !u!114 &-8533617965811129132
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,13 +123,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 845211666665590082}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 128d328bc71705c478c5187b33b4115a, type: 3}
+  m_Script: {fileID: 11500000, guid: cc925a9f809847d47ba630d1509897cd, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Collectable
-  value: 100
-  collectSound: {fileID: 0}
-  powerup: {fileID: 0}
-  buffDuration: 10
+  m_EditorClassIdentifier: Assembly-CSharp::PowerUpItem
+  value: 200
+  collectSound: {fileID: 8300000, guid: 10a46902cc4787547a178805084b5cd7, type: 3}
+  powerUp: {fileID: 11400000, guid: 8716c9f26933b4647b0f080e1109f24e, type: 2}
 --- !u!1 &3828383889829177581
 GameObject:
   m_ObjectHideFlags: 0

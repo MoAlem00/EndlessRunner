@@ -4080,7 +4080,8 @@ MonoBehaviour:
   player: {fileID: 333502644}
   obstaclePoolerManager: {fileID: 1010104221}
   groundPooler: {fileID: 880352159}
-  collectablesPooler: {fileID: 2074659938}
+  coinsPooler: {fileID: 1495554695}
+  powerUpsPooler: {fileID: 2074659938}
   startingGroundAmount: 15
   gap: {x: 0, y: 0, z: 0}
 --- !u!4 &708936724
@@ -4439,52 +4440,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 728890946}
   m_CullTransparentMesh: 1
---- !u!1 &751173091
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 751173092}
-  - component: {fileID: 751173093}
-  m_Layer: 0
-  m_Name: CoinPooler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &751173092
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 751173091}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2074659937}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &751173093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 751173091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b88eaee3d158112459e61cb3a55cc733, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BasicObjectPooler
-  prefab: {fileID: 8423267239095302013, guid: f9d1e687b11956e4fb6bf4d11801584d, type: 3}
-  initialPoolSize: 20
 --- !u!1 &777680190
 GameObject:
   m_ObjectHideFlags: 0
@@ -7593,7 +7548,7 @@ GameObject:
   - component: {fileID: 1495554694}
   - component: {fileID: 1495554695}
   m_Layer: 0
-  m_Name: CollectablePooler
+  m_Name: CoinPooler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9903,7 +9858,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 751173092}
   - {fileID: 1876882108}
   - {fileID: 162874881}
   - {fileID: 2138544352}
@@ -9922,7 +9876,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArrayObjectPooler
   poolers:
-  - {fileID: 751173093}
   - {fileID: 1876882109}
   - {fileID: 162874882}
   - {fileID: 2138544353}

@@ -18,5 +18,11 @@ MonoBehaviour:
   ObstacleTypes:
   - {fileID: 8383949111619251967, guid: eb079df9ae4d10448afa6b8e2c392dbe, type: 3}
   - {fileID: 2080719412400346052, guid: a2df5a43afd3c3e44bd106f135e4311c, type: 3}
-  powerUpChance: 0
-  powerUps: []
+  powerUpChance: 0.2
+  powerUps:
+  - powerUp: {fileID: 11400000, guid: 8716c9f26933b4647b0f080e1109f24e, type: 2}
+    weight: 0.3
+  - powerUp: {fileID: 11400000, guid: 3da326394dd91c2448a4de16097d9949, type: 2}
+    weight: 0.2
+  - powerUp: {fileID: 11400000, guid: 3da326394dd91c2448a4de16097d9949, type: 2}
+    weight: 0.1

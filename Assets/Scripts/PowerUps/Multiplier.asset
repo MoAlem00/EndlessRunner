@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0d057fecc0197f49ab7fc2f88b1e348, type: 3}
   m_Name: Multiplier
   m_EditorClassIdentifier: Assembly-CSharp::PowerUp
+  prefab: {fileID: 5452406791097415053, guid: 3fe49ebc1d4e91a4781e61752199c957, type: 3}
   effects: 00000000
   duration: 5
