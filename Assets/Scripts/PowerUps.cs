@@ -8,5 +8,4 @@ public class PowerUps : ScriptableObject
     public GameObject prefab;
     public PowerUpType type;
     public float duration = 5f;
-    public float spawnRate = 1f;
 }

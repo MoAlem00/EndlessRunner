@@ -1,5 +1,12 @@
 using UnityEngine;
 
+[System.Serializable]
+public struct PowerUpSpawn
+{
+    public PowerUps powerUp;
+    public float weight;
+}
+
 [CreateAssetMenu(fileName = "Difficulty", menuName = "Scriptable Objects/Difficulty")]
 public class Difficulty : ScriptableObject
 {
@@ -11,4 +18,7 @@ public class Difficulty : ScriptableObject
     public int maxObstacles = 20;
     [Tooltip("Obstacle Types Per Difficulty")]
     public GameObject[] ObstacleTypes;
+    [Tooltip("PowerUps")]
+    public float powerUpChance;
+    public PowerUpSpawn[] powerUps;
 }
