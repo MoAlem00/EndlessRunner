@@ -1,24 +1,33 @@
 using System;
 using UnityEngine;
-using SE = PlayerController.StatusEffectType;
 public class Collectable : MonoBehaviour
 {
     [SerializeField] private int value = 100;
     [SerializeField] private AudioClip collectSound;
-    [SerializeField] private SE[] effects;
+    [SerializeField] private PowerUp powerup; 
     [SerializeField] private float buffDuration = 10.0f;
     public static event Action<GameObject> OnPickedUp; 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Score.Instance.AddScore(value);
-            Score.Instance.CollectCoin();
+            OnCollect(other.gameObject);
+        }
+    }
+
+    public void OnCollect(GameObject other)
+    {
+
+            PlayerController pc = other.gameObject.GetComponent<PlayerController>();
+            
+            int multiplier = 1;
+
+            if(pc.HasEffect(PowerUpType.Multiplier)) multiplier++;
+            Score.Instance.AddScore(value * multiplier);
+            Score.Instance.CollectCoin(multiplier);
             AudioManager.Instance.PlaySfx(collectSound);
             OnPickedUp?.Invoke(gameObject);
             Score.Instance.AddScore(value);
-            PlayerController pc = other.gameObject.GetComponent<PlayerController>();
-            foreach(SE e in effects) pc.AddEffect(e, buffDuration);            
-        }
+            foreach(PowerUpType e in powerup.effects) pc.AddEffect(e, buffDuration);            
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
@@ -20,7 +21,6 @@ public class PlayerController : MonoBehaviour
     private bool isDead = false;
     private float stumbleSpeed;
     private float normalSpeed;
-    private bool isInvulnerable = false;
     private bool wasGrounded;
     [SerializeField] AudioClip concreteHitSound;
     [SerializeField] AudioClip landingSound;
@@ -31,17 +31,9 @@ public class PlayerController : MonoBehaviour
     private bool touchStartedInGame;
     private Vector2 startTouchPosition, endTouchPosition;
 
-    /// <summary>
-    /// Cheap status effect system so we do not add tons of booleans, easier to manage.<br/>
-    /// See AddEffect and HasEffect.
-    /// </summary>
-    public enum StatusEffectType
-    {
-        Invulnerable,
-        Magnetic
-    }
+    private Dictionary<PowerUpType, float> effectEndTimes = new();
 
-    private Dictionary<StatusEffectType, float> effectEndTimes = new();
+    [SerializeField] private Vector3 magnetSize = new Vector3(15,5,5);
 
     void Awake()
     {
@@ -74,9 +66,15 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+
+        if(!Score.Instance.isDoubleScore && HasEffect(PowerUpType.Multiplier) ||
+         Score.Instance.isDoubleScore && !HasEffect(PowerUpType.Multiplier))
+            Score.Instance.ToggleDoubleScore();
+        
+
         if (effectEndTimes.Count > 0)
         {
-            var keys = new List<StatusEffectType>(effectEndTimes.Keys);
+            var keys = new List<PowerUpType>(effectEndTimes.Keys);
 
             foreach (var key in keys)
             {
@@ -119,12 +117,38 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.Instance.IsPlaying()) return;
         MovePlayer();
+        if(HasEffect(PowerUpType.Magnetic)) Attract();
+    }
+
+    void Attract()
+    {
+        Vector3 size = Vector3.Scale(transform.localScale, magnetSize);
+        Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, size, Quaternion.identity);
+        int i = 0;
+        while (i < hitColliders.Length)
+        {
+            if(hitColliders[i].name.Contains("Coin"))
+            {
+                Transform trans = hitColliders[i].gameObject.transform;
+                trans.position = Vector3.MoveTowards(trans.position, gameObject.transform.position, 30 * Time.deltaTime);
+            }
+            i++;
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        // Check that it is being run in Play Mode, so it doesn't try to draw this in Editor mode
+        if (Application.isPlaying)
+            // Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
+            Gizmos.DrawWireCube(transform.position, magnetSize);
     }
 
     /// <summary>
     /// Checks if the Effect is active.
     /// </summary>
-    public bool HasEffect(StatusEffectType type)
+    public bool HasEffect(PowerUpType type)
     {
         return effectEndTimes.TryGetValue(type, out float endTime)
                && Time.time < endTime;
@@ -134,7 +158,7 @@ public class PlayerController : MonoBehaviour
     /// Adds an Effect which ends hwen a certain game time is reached.<br/>
     /// Should respect current duration of effects and override it only if it will extend the duration, as if multiple of they were mutliple instances of the same effect. 
     /// </summary>
-    public void AddEffect(StatusEffectType type, float duration)
+    public void AddEffect(PowerUpType type, float duration)
     {
         float newEndTime = Time.time + duration;
 
@@ -165,8 +189,7 @@ public class PlayerController : MonoBehaviour
     {
         anim.SetBool("IsRunning", true);
 
-        float totalSpeed = speed * Time.deltaTime *
-                           DifficultyManager.Instance.difficulty.movementSpeedMultiplier;
+        float totalSpeed = speed * Time.deltaTime * DifficultyManager.Instance.difficulty.movementSpeedMultiplier;
 
         Vector3 moveForward = transform.forward * totalSpeed;
         float targetX = (currentLane - 1) * laneDistance;
@@ -194,7 +217,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator HandleObstacleHit()
     {
-        AddEffect(StatusEffectType.Invulnerable, 0.7f);
+        AddEffect(PowerUpType.Invulnerable, 0.7f);
 
         Health.Instance.LoseLife();
         if (isDead) yield break;
@@ -221,7 +244,7 @@ public class PlayerController : MonoBehaviour
             effect.GetComponent<ParticleSystem>().Play();
             AudioManager.Instance.PlaySfx(concreteHitSound,0.5f);
 
-            if (!HasEffect(StatusEffectType.Invulnerable))
+            if (!HasEffect(PowerUpType.Invulnerable))
                 StartCoroutine(HandleObstacleHit());
         }
     }

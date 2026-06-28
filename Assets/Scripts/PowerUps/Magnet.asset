@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c2cce34e67ae4041b083740d47b386d, type: 3}
+  m_Script: {fileID: 11500000, guid: e0d057fecc0197f49ab7fc2f88b1e348, type: 3}
   m_Name: Magnet
-  m_EditorClassIdentifier: Assembly-CSharp::PowerUps
-  prefab: {fileID: 845211666665590082, guid: 557eb75fc2083e6448fa14328b5324b2, type: 3}
-  type: 1
+  m_EditorClassIdentifier: Assembly-CSharp::PowerUp
+  prefab: {fileID: 0}
+  effects: 
   duration: 5
-  spawnRate: 1

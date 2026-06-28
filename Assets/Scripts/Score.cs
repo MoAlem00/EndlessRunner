@@ -11,9 +11,10 @@ public class Score : MonoBehaviour
     private float timeSinceStart = 0;
     private int coinsScore = 0;
     public int coinsCollected = 0;
+    public float bonusScore = 0;
+    public bool isDoubleScore = false;
     public float startTime;
     private bool stopTimeScore = false;
-
     public int CoinsCollected => coinsCollected;
     public int CurrentScore => currentScore;
     public float TimeSinceStart => timeSinceStart;
@@ -39,7 +40,21 @@ public class Score : MonoBehaviour
         if(!GameManager.Instance.IsPlaying()) return;
         if (stopTimeScore) return;
         timeSinceStart =  Time.time - startTime;
-        int total = coinsScore + Mathf.FloorToInt(DistanceTracker.Instance.GetDistance() * distanceFactor) + Mathf.FloorToInt(timeSinceStart * timeFactor);
+        int total = coinsScore;
+        
+        // distance
+        total += Mathf.FloorToInt(DistanceTracker.Instance.GetDistance() * distanceFactor); 
+        // time
+        total += Mathf.FloorToInt(timeSinceStart * timeFactor);
+
+
+        // bonus
+        if(isDoubleScore)
+        {
+            bonusScore += Time.deltaTime * timeFactor;
+            bonusScore += 8 * Time.deltaTime * DifficultyManager.Instance.difficulty.movementSpeedMultiplier;
+        }
+        total += Mathf.FloorToInt(bonusScore);
 
         if (total != currentScore)
         {
@@ -48,14 +63,19 @@ public class Score : MonoBehaviour
         }
     }
 
+    public void ToggleDoubleScore()
+    {
+        isDoubleScore = !isDoubleScore;
+    }
+
     public void AddScore(int scoreToAdd)
     {
         coinsScore += scoreToAdd;
     }
 
-    public void CollectCoin()
+    public void CollectCoin(int amount = 1)
     {
-        coinsCollected++;
+        coinsCollected += amount;
         OnCoinsChanged?.Invoke(coinsCollected);
     }
 

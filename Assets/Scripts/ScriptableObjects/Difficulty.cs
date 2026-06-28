@@ -3,7 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public struct PowerUpSpawn
 {
-    public PowerUps powerUp;
+    public PowerUp powerUp;
     public float weight;
 }
 

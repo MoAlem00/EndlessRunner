@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3375815883506119277}
   - component: {fileID: 2987841331270313401}
   - component: {fileID: 3409302318251231864}
+  - component: {fileID: 8199522617245628451}
   m_Layer: 0
   m_Name: Magnet
   m_TagString: Untagged
@@ -113,6 +114,22 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.010457747
   m_Center: {x: 0, y: 0.006742957, z: 0}
+--- !u!114 &8199522617245628451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845211666665590082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128d328bc71705c478c5187b33b4115a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Collectable
+  value: 100
+  collectSound: {fileID: 0}
+  powerup: {fileID: 0}
+  buffDuration: 10
 --- !u!1 &3828383889829177581
 GameObject:
   m_ObjectHideFlags: 0

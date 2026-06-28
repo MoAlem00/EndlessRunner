@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 6367242701587254790}
   - component: {fileID: 4693277466113736046}
   - component: {fileID: 3820327565547324501}
+  - component: {fileID: -8463043301809697956}
   m_Layer: 0
-  m_Name: InvincibleShield
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,9 +107,25 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 45.30756
   m_Center: {x: 0, y: -0.63745046, z: -45.307556}
+--- !u!114 &-8463043301809697956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6428256638461663421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128d328bc71705c478c5187b33b4115a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Collectable
+  value: 100
+  collectSound: {fileID: 8300000, guid: 10a46902cc4787547a178805084b5cd7, type: 3}
+  powerup: {fileID: 11400000, guid: 3da326394dd91c2448a4de16097d9949, type: 2}
+  buffDuration: 5
