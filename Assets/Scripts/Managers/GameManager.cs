@@ -4,15 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum GameState { MainMenu, GameOver, Paused, Playing }
-/// <summary>
-/// To-Do maybe implemnet? its not part of the assingment
-/// </summary>
-public enum ControlMode { Swipe, Joystick }
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameState gameState { get; private set; }
-    public ControlMode controlMode;
     public event Action<GameState> OnStateChanged;
 
     private void Awake()
@@ -54,8 +50,21 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("MoAlemScene");
     }
+    
+    public void PauseGame()
+    {
+        SetState(GameState.Paused);
+        Time.timeScale = 0f;
+    }
+    
+    public void ResumeGame()
+    {
+        SetState(GameState.Playing);
+        Time.timeScale = 1f;
+    }
+    
 
     public bool IsPlaying()
     {

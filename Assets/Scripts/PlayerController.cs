@@ -83,32 +83,35 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        foreach (var touch in Touch.activeTouches)
+        if (InputManager.Instance.CurrentType == InputType.Swipe)
         {
-            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
+            foreach (var touch in Touch.activeTouches)
             {
-                if (!GameManager.Instance.IsPlaying()) continue;
+                if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
+                {
+                    if (!GameManager.Instance.IsPlaying()) continue;
 
-                touchStartedInGame = true;
-                startTouchPosition = touch.screenPosition;
-            }
+                    touchStartedInGame = true;
+                    startTouchPosition = touch.screenPosition;
+                }
 
-            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Ended)
-            {
-                if (!touchStartedInGame) continue;
+                if (touch.phase == UnityEngine.InputSystem.TouchPhase.Ended)
+                {
+                    if (!touchStartedInGame) continue;
 
-                touchStartedInGame = false;
-                endTouchPosition = touch.screenPosition;
+                    touchStartedInGame = false;
+                    endTouchPosition = touch.screenPosition;
 
-                float deadZone = Screen.width * X_SWIPE_DEAD_ZONE_PERCENTAGE;
-                float distance = Mathf.Abs(endTouchPosition.x - startTouchPosition.x);
+                    float deadZone = Screen.width * X_SWIPE_DEAD_ZONE_PERCENTAGE;
+                    float distance = Mathf.Abs(endTouchPosition.x - startTouchPosition.x);
 
-                if (distance <= deadZone)
-                    Jump();
-                else if (endTouchPosition.x < startTouchPosition.x)
-                    MoveLeft();
-                else
-                    MoveRight();
+                    if (distance <= deadZone)
+                        Jump();
+                    else if (endTouchPosition.x < startTouchPosition.x)
+                        MoveLeft();
+                    else
+                        MoveRight();
+                }
             }
         }
     }
@@ -127,7 +130,7 @@ public class PlayerController : MonoBehaviour
         int i = 0;
         while (i < hitColliders.Length)
         {
-            if(hitColliders[i].name.Contains("Coin"))
+            if(hitColliders[i].CompareTag("Coin"))
             {
                 Transform trans = hitColliders[i].gameObject.transform;
                 trans.position = Vector3.MoveTowards(trans.position, gameObject.transform.position, 30 * Time.deltaTime);

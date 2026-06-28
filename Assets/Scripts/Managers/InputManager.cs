@@ -31,5 +31,6 @@ public class InputManager : MonoBehaviour
         currentType = (InputType)input;
         PlayerPrefs.SetInt("InputType", input);
         OnTypeChange?.Invoke(currentType);
+        Debug.Log(currentType);
     }
 }

@@ -4,7 +4,8 @@ using UnityEngine.UI;
 public class OptionsMenu : MonoBehaviour
 {
     [SerializeField] private GameObject optionsPanel;
-    [SerializeField] private Image[] difficultyButtons; 
+    [SerializeField] private Image[] difficultyButtons;
+    [SerializeField] private Image[] InputButtons;
     private readonly Color selectedColor = Color.gray; 
     private readonly Color normalColor = Color.white;
     
@@ -13,6 +14,7 @@ public class OptionsMenu : MonoBehaviour
     {
         optionsPanel.SetActive(true);
         UpdateButtonVisuals(PlayerPrefs.GetInt("ChosenDifficulty", 0));
+        UpdateInputVisuals(PlayerPrefs.GetInt("InputType", 0));
     }
     
     private void UpdateButtonVisuals(int selected)
@@ -21,6 +23,12 @@ public class OptionsMenu : MonoBehaviour
         {
             difficultyButtons[i].color = (i == selected) ? selectedColor : normalColor;
         }
+    }
+    
+    private void UpdateInputVisuals(int selected)
+    {
+        for (int i = 0; i < InputButtons.Length; i++)
+            InputButtons[i].color = (i == selected) ? selectedColor : normalColor;
     }
     public void OnDifficultyButtonSelected(int type)
     {
