@@ -26,7 +26,6 @@ public class DifficultyManager : MonoBehaviour
     private DifficultyType currentType;
     private Dictionary<DifficultyType, Difficulty> map;
     public static DifficultyManager Instance { get; private set; }
-    public int selectedDifficulty = -1;
     public Difficulty difficulty;
 
     private void Awake()
@@ -43,14 +42,13 @@ public class DifficultyManager : MonoBehaviour
 
         foreach (DifficultyEntry e in entries)
             map[e.type] = e.difficulty;
-
-        if(selectedDifficulty == -1) SetDifficulty(DifficultyType.Easy);
-        else SetDifficulty((DifficultyType)selectedDifficulty);
     }
 
     private void Start()
     {
+        chosenType = (DifficultyType)PlayerPrefs.GetInt("ChosenDifficulty", 0);
         currentType = chosenType;
+        SetDifficulty(chosenType);
     }
 
     private void Update()
@@ -75,7 +73,12 @@ public class DifficultyManager : MonoBehaviour
 
     public void SetDifficulty(DifficultyType type) => ApplyDifficulty(map[type]);
     
-    public void SelectDifficulty(int type) => chosenType = (DifficultyType)type;
+    public void SelectDifficulty(int type)
+    {
+        chosenType = (DifficultyType)type;
+        PlayerPrefs.SetInt("ChosenDifficulty", type);
+    }
+
     private void ApplyDifficulty(Difficulty difficulty)
     {
         this.difficulty = difficulty;
