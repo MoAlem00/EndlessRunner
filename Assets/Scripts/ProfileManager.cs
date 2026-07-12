@@ -7,7 +7,7 @@ public class ProfileManager : MonoBehaviour
     public static ProfileManager Instance;
     
     private ProfileData selectedProfile;
-    private Theme selectedTheme;
+    public Theme selectedTheme;
     
     private void Awake()
     {

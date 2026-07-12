@@ -9,7 +9,6 @@ public class HUD : MonoBehaviour
     [SerializeField] private TMP_Text coinsCounterText;
     [SerializeField] private Image[] hearts;
     [SerializeField] private GameObject gameOverMenu;
-    //[SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private TMP_Text finalScoreText;
@@ -70,7 +69,6 @@ public class HUD : MonoBehaviour
             finalScoreText.text = "SCORE: " + Score.Instance.CurrentScore;
             totalTimeText.text  = "TIME: " + Mathf.FloorToInt(Score.Instance.TimeSinceStart) + " s";
         }
-        //mainMenu.SetActive(state == GameState.MainMenu);
         pauseMenu.SetActive(state == GameState.Paused);
         pauseButton.interactable = state == GameState.Playing;
     }

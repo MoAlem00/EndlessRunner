@@ -18,15 +18,10 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start()
-    { 
-        //StartCoroutine(AudioManager.Instance.PlayShuffleMusic());
+    {
         gameState = GameState.Playing;
     }
-
-    /*public void GoToGameScene()
-    {
-        SceneManager.LoadScene("MainScene");
-    }*/
+    
 
     private void SetState(GameState newState)
     {

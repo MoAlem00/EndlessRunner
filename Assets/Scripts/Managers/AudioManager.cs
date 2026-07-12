@@ -10,8 +10,6 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource sfxSource;
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioMixer mixer;
-    [SerializeField] private Slider musicSlider;
-    [SerializeField] private Slider sfxSlider;
     
     private void Awake()
     {
@@ -29,8 +27,6 @@ public class AudioManager : MonoBehaviour
         float sfx = PlayerPrefs.GetFloat("SFXVolume", 1f);
         SetBGMVolume(bgm);
         SetSFXVolume(sfx);
-        musicSlider.value = bgm;
-        sfxSlider.value = sfx;
     }
 
     public void PlaySfx(AudioClip clip, float volume = 1f)
