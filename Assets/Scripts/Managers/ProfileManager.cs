@@ -62,13 +62,15 @@ public class ProfileManager : MonoBehaviour
     private static string GetJsonPath(int slotIndex) => Path.Combine(GetProfileFolder(), $"profile_{slotIndex}.json");
     private static string GetScreenshotPath(int slotIndex) => Path.Combine(GetProfileFolder(), $"profile_{slotIndex}.png");
 
+    /// Check if it exists
     public bool DoesProfileExist(int slotIndex) => File.Exists(GetJsonPath(slotIndex));
 
     public void SetActiveSlot(int slotIndex) => ActiveSlotIndex = slotIndex;
 
-    /// Reads a slot's JSON without applying it to the active session (for slot-picker previews).
+    /// For reading data and previewing it.
     public ProfileData PeekProfile(int slotIndex) => ReadProfileFromDisk(slotIndex);
 
+    /// A screenshot of a profile slot
     public Texture2D LoadProfileScreenshot(int slotIndex)
     {
         string path = GetScreenshotPath(slotIndex);
@@ -80,6 +82,7 @@ public class ProfileManager : MonoBehaviour
         return texture;
     }
 
+    /// Call to save the profile, call SaveProfileImmediate if you want to force it now, important when quitting app.
     public void SaveProfile(int slotIndex, string profileName = null)
     {
         ActiveSlotIndex = slotIndex;
