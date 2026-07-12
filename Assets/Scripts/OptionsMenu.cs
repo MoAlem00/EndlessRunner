@@ -10,6 +10,9 @@ public class OptionsMenu : MonoBehaviour
     private readonly Color normalColor = Color.white;
     
     public void Close() => optionsPanel.SetActive(false);
+    
+    public void OnMusicSliderChanged(float value) => AudioManager.Instance.SetBGMVolume(value);
+    public void OnSfxSliderChanged(float value)   => AudioManager.Instance.SetSFXVolume(value);
     public void Open()
     {
         optionsPanel.SetActive(true);

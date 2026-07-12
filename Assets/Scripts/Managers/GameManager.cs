@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum GameState { MainMenu, GameOver, Paused, Playing }
+public enum GameState { GameOver, Paused, Playing }
 
 public class GameManager : MonoBehaviour
 {
@@ -18,10 +18,15 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start()
-    {
-        StartCoroutine(AudioManager.Instance.PlayShuffleMusic());
-        gameState = GameState.MainMenu;
+    { 
+        //StartCoroutine(AudioManager.Instance.PlayShuffleMusic());
+        gameState = GameState.Playing;
     }
+
+    /*public void GoToGameScene()
+    {
+        SceneManager.LoadScene("MainScene");
+    }*/
 
     private void SetState(GameState newState)
     {
@@ -64,7 +69,6 @@ public class GameManager : MonoBehaviour
         SetState(GameState.Playing);
         Time.timeScale = 1f;
     }
-    
 
     public bool IsPlaying()
     {

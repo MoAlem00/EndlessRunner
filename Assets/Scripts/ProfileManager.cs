@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ProfileManager : MonoBehaviour
 {
     public static ProfileManager Instance;
     
     private ProfileData selectedProfile;
+    private Theme selectedTheme;
     
     private void Awake()
     {
@@ -22,5 +24,17 @@ public class ProfileManager : MonoBehaviour
     public void SelectProfile(ProfileData data)
     {
         selectedProfile = data;
+        Debug.Log(data.profileName);
+    }
+
+    public void SelectTheme(Theme theme)
+    {
+        selectedTheme = theme;
+        Debug.Log(theme.name);
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

@@ -53,6 +53,7 @@ public class DifficultyManager : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance == null || !GameManager.Instance.IsPlaying()) return;
         float distance = DistanceTracker.Instance.GetDistance();
         DifficultyType best = chosenType;
         float bestDist = -1f;
