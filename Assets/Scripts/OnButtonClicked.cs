@@ -5,13 +5,13 @@ public class OnButtonClicked : MonoBehaviour
 {
     public void OnStartPressed()
     {
-        ProfileManager.Instance.StartNewRun();
+        //ProfileManager.Instance.StartNewRun();
         SceneManager.LoadScene("MoAlemScene");
     }
 
     public void OnReplayPressed()
     {
-        ProfileManager.Instance.ReplayLastRun();
+        //ProfileManager.Instance.ReplayLastRun();
         SceneManager.LoadScene("MoAlemScene");
     }
 }

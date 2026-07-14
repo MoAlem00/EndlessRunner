@@ -25,7 +25,7 @@ public class ProfileUI : MonoBehaviour
         }
     }
 
-    private List<ProfileData> GetProfiles()
+    /*private List<ProfileData> GetProfiles()
     {
         return new List<ProfileData>
         {
@@ -35,5 +35,5 @@ public class ProfileUI : MonoBehaviour
             new ProfileData { profileName = "Mohammad", highScore = 500000, distance = 324324, coinsEarned = 87555 },
             new ProfileData { profileName = "Sami", highScore = 345435, distance = 23456, coinsEarned = 38999 },
         };
-    }
+    }*/
 }

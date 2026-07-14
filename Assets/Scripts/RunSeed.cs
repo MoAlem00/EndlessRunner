@@ -4,8 +4,8 @@ public class RunSeed : MonoBehaviour
 {
     private void Awake()
     {
-        int seed = ProfileManager.Instance.currentSeed;
-        Random.InitState(seed);
-        Debug.Log("Seed: " + seed);
+        int seed;//= ProfileManager.Instance.currentSeed;
+        //Random.InitState(seed);
+        //Debug.Log("Seed: " + seed);
     }
 }
