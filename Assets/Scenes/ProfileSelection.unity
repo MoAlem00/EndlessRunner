@@ -1182,6 +1182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72e8e14bc017a924c933dc9742c236fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProfileManager
+  defaultTheme: {fileID: 11400000, guid: a33b031b4974dee4098500672d992756, type: 2}
+  selectedTheme: {fileID: 0}
 --- !u!4 &1302286293
 Transform:
   m_ObjectHideFlags: 0

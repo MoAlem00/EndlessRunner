@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -10,6 +9,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource sfxSource;
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioMixer mixer;
+    private System.Random musicRandom = new System.Random();
     
     private void Awake()
     {
@@ -49,7 +49,7 @@ public class AudioManager : MonoBehaviour
         if (gameMusic == null || gameMusic.Length == 0) yield break; 
         while (true)
         {
-            int random = Random.Range(0, gameMusic.Length);
+            int random = musicRandom.Next(0, gameMusic.Length);
             PlayMusic(gameMusic[random]);
             yield return new WaitWhile(() => musicSource.isPlaying);
         }

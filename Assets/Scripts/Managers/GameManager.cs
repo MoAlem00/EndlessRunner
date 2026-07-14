@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
+
 
 public enum GameState { GameOver, Paused, Playing }
 
@@ -21,7 +23,11 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameState.Playing;
     }
-    
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 
     private void SetState(GameState newState)
     {

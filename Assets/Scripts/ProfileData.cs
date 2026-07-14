@@ -9,4 +9,6 @@ public class ProfileData
     public int distance;
     public int coinsEarned;
     public string thumbnailPath;
+    public int lastRunSeed;
+    public string themeId;
 }

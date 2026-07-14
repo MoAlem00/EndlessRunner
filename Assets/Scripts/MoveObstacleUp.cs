@@ -10,16 +10,7 @@ public class MoveObstacleUp : MonoBehaviour
     private float maxSpeed = 3f;
     private float minSpeed = 1f;
     private Vector3 direction;
-
-    private void Start()
-    {
-        int randomDir = Random.Range(0, 2);
-        if (randomDir == 0) direction = Vector3.up;
-        else if (randomDir == 1) direction = Vector3.down;
-        float randomSpeed = Random.Range(minSpeed, maxSpeed);
-        speed = randomSpeed;
-    }
-
+    
     void Update()
     {
         transform.position += direction * (speed * Time.deltaTime);
@@ -32,6 +23,15 @@ public class MoveObstacleUp : MonoBehaviour
         Vector3 p = transform.position;
         p.y = y;
         transform.position = p;
+    }
+
+    private void OnEnable()
+    {
+        int randomDir = Random.Range(0, 2);
+        if (randomDir == 0) direction = Vector3.up;
+        else if (randomDir == 1) direction = Vector3.down;
+        float randomSpeed = Random.Range(minSpeed, maxSpeed);
+        speed = randomSpeed;
     }
 
 }

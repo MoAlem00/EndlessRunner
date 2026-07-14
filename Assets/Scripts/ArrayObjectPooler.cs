@@ -32,32 +32,7 @@ public class ArrayObjectPooler : MonoBehaviour
             poolForActiveObject.Remove(obj);
         }
     }
-
-    /*public GameObject GetWeightedRandom()
-    {
-        int totalWeight = 0;
-
-        foreach (var pooler in poolers)
-            totalWeight += pooler.initialPoolSize;
-
-        int roll = Random.Range(0, totalWeight);
-
-        foreach (var pooler in poolers)
-        {
-            roll -= pooler.initialPoolSize;
-
-            if (roll < 0)
-            {
-                GameObject obj = pooler.GetPooledObject();
-                poolForActiveObject[obj] = pooler;
-                return obj;
-            }
-        }
-
-        GameObject fallback = poolers[^1].GetPooledObject();
-        poolForActiveObject[fallback] = poolers[^1];
-        return fallback;
-    }*/
+    
 
     public PowerUp PickWeightedPowerUp()
     {
