@@ -16,6 +16,8 @@ public class ProfileData
     public float bgmVolume = 1f;
     public float sfxVolume = 1f;
     public string lastSavedUtc;
+    public int lastRunSeed;
+    public string themeId;
 }
 
 // How to use it:
@@ -31,7 +33,10 @@ public class ProfileData
 public class ProfileManager : MonoBehaviour
 {
     public const int MaxProfileSlots = 3;
-
+    public Theme selectedTheme;
+    [SerializeField] private Theme defaultTheme;
+    [SerializeField] private Theme[] allThemes;
+    public int currentSeed;
     public static ProfileManager Instance { get; private set; }
     public ProfileData ActiveProfile { get; private set; }
     public int ActiveSlotIndex { get; private set; }
@@ -57,7 +62,28 @@ public class ProfileManager : MonoBehaviour
         // so autosave captures and writes synchronously instead of via SaveProfile().
         SaveProfileImmediate(ActiveSlotIndex);
     }
-
+    
+    public void SelectTheme(Theme theme) => selectedTheme = theme;
+    
+    private Theme FindThemeById(string id)
+    {
+        foreach (Theme t in allThemes)
+            if (t.themeName == id) return t;
+        return defaultTheme;
+    }
+    public void StartNewRun()
+    {
+        currentSeed = System.DateTime.Now.GetHashCode();
+        if (ActiveProfile != null) ActiveProfile.lastRunSeed = currentSeed;
+    }
+    
+    public void ReplayLastRun()
+    {
+        currentSeed = (ActiveProfile != null && ActiveProfile.lastRunSeed != 0)
+            ? ActiveProfile.lastRunSeed
+            : System.DateTime.Now.GetHashCode();
+    }
+    
     public static string GetProfileFolder() => Path.Combine(Application.persistentDataPath, "Profiles");
     private static string GetJsonPath(int slotIndex) => Path.Combine(GetProfileFolder(), $"profile_{slotIndex}.json");
     private static string GetScreenshotPath(int slotIndex) => Path.Combine(GetProfileFolder(), $"profile_{slotIndex}.png");
@@ -96,7 +122,7 @@ public class ProfileManager : MonoBehaviour
         WriteProfileJson(slotIndex, profileName);
     }
 
-    private void SaveProfileImmediate(int slotIndex, string profileName = null)
+    public void SaveProfileImmediate(int slotIndex, string profileName = null)
     {
         CaptureAndWriteScreenshot(slotIndex);
         WriteProfileJson(slotIndex, profileName);
@@ -138,7 +164,9 @@ public class ProfileManager : MonoBehaviour
             chosenInputType = PlayerPrefs.GetInt("InputType", 0),
             bgmVolume = PlayerPrefs.GetFloat("BGMVolume", 1f),
             sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 1f),
-            lastSavedUtc = DateTime.UtcNow.ToString("o")
+            lastSavedUtc = DateTime.UtcNow.ToString("o"),
+            lastRunSeed = currentSeed != 0 ? currentSeed : (existing != null ? existing.lastRunSeed : 0),
+            themeId = selectedTheme != null ? selectedTheme.themeName : (existing != null ? existing.themeId : "")
         };
 
         try
@@ -172,7 +200,7 @@ public class ProfileManager : MonoBehaviour
             AudioManager.Instance.SetBGMVolume(data.bgmVolume);
             AudioManager.Instance.SetSFXVolume(data.sfxVolume);
         }
-
+        selectedTheme = FindThemeById(data.themeId);
         OnProfileLoaded?.Invoke(data);
         return true;
     }
