@@ -56,7 +56,7 @@ public class ProfileManager : MonoBehaviour
         }
     }
 
-    private void OnApplicationQuit()
+    public void OnApplicationQuit()
     {
         // Coroutines aren't guaranteed to run to completion once quit begins,
         // so autosave captures and writes synchronously instead of via SaveProfile().

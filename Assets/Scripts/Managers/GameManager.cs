@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator ShowGameOverAfterDelay()
     {
+        ProfileManager.Instance.SaveProfile(ProfileManager.Instance.ActiveSlotIndex);
         yield return new WaitForSeconds(2f);
         SetState(GameState.GameOver);
     }
@@ -48,8 +49,10 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         #if UNITY_EDITOR
+        ProfileManager.Instance.OnApplicationQuit();
         UnityEditor.EditorApplication.isPlaying = false;
         #else
+        ProfileManager.Instance.OnApplicationQuit();
         Application.Quit();
         #endif
     }
