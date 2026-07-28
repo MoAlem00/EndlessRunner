@@ -21,6 +21,10 @@ public class Score : MonoBehaviour
     public event Action<int> OnScoreChanged;
     public event Action<int> OnCoinsChanged;
 
+    private int powerUpsCollected = 0;
+    public int PowerUpsCollected => powerUpsCollected;
+
+    public void CollectPowerUp() => powerUpsCollected++;
     private void Awake()
     {
         if (Instance == null)
@@ -83,6 +87,7 @@ public class Score : MonoBehaviour
     {
         coinsScore = 0;
         coinsCollected = 0;
+        powerUpsCollected = 0;
         startTime = Time.time;
         DistanceTracker.Instance.ResetDistance();
     }

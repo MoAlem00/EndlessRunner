@@ -22,6 +22,7 @@ public class PowerUpItem : MonoBehaviour, ICollectable
         int multiplier = 1;
         if (player.HasEffect(PowerUpType.Multiplier)) multiplier++;
         Score.Instance.AddScore(value * multiplier);
+        Score.Instance.CollectPowerUp();
         AudioManager.Instance.PlaySfx(collectSound);
         foreach(PowerUpType e in powerUp.effects) player.AddEffect(e, powerUp.duration);
         OnPickedUp?.Invoke(gameObject);
