@@ -168,7 +168,6 @@ public class ProfileManager : MonoBehaviour
             lastRunSeed = currentSeed != 0 ? currentSeed : (existing != null ? existing.lastRunSeed : 0),
             themeId = selectedTheme != null ? selectedTheme.themeName : (existing != null ? existing.themeId : "")
         };
-
         try
         {
             Directory.CreateDirectory(GetProfileFolder());
@@ -178,6 +177,7 @@ public class ProfileManager : MonoBehaviour
         {
             Debug.LogError($"[ProfileManager] Failed to save profile {slotIndex}: {e.Message}");
         }
+        if(Score.Instance != null) Score.Instance.ResetCoins();
     }
 
     public bool LoadProfile(int slotIndex)
@@ -219,5 +219,14 @@ public class ProfileManager : MonoBehaviour
             Debug.LogError($"[ProfileManager] Failed to read profile {slotIndex}: {e.Message}");
             return null;
         }
+    }
+    
+    public void AddCoins(int amount)
+    {
+        ProfileData data = ReadProfileFromDisk(ActiveSlotIndex);
+        if (data == null) return;
+        data.totalCoins += amount;
+        File.WriteAllText(GetJsonPath(ActiveSlotIndex), JsonUtility.ToJson(data, true));
+        if (ActiveProfile != null) ActiveProfile.totalCoins = data.totalCoins;
     }
 }

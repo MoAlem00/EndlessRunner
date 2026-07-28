@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,10 +6,14 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject themePanel;
     [SerializeField] private GameObject mainMenuPanel;
+    [SerializeField] private GameObject rewardPanel;
+    [SerializeField] private TMP_Text coinsText;
 
     private void Start()
     {
+        UpdateCoinsDisplay();
         StartCoroutine(AudioManager.Instance.PlayShuffleMusic());
+        rewardPanel.SetActive(DailyRewardManager.Instance.IsRewardAvailable());
     }
     public void StartGame()
     {
@@ -34,5 +39,20 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuPanel.SetActive(true);
         themePanel.SetActive(false);
+    }
+    
+    public void OnClaimPressed()
+    {
+        DailyRewardManager.Instance.ClaimReward();
+        rewardPanel.SetActive(false);
+        UpdateCoinsDisplay();
+    }
+    
+    private void UpdateCoinsDisplay()
+    {
+        int coins = ProfileManager.Instance.ActiveProfile != null
+            ? ProfileManager.Instance.ActiveProfile.totalCoins
+            : 0;
+        coinsText.text = coins.ToString();
     }
 }

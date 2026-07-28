@@ -86,4 +86,6 @@ public class Score : MonoBehaviour
         startTime = Time.time;
         DistanceTracker.Instance.ResetDistance();
     }
+    
+    public void ResetCoins() => coinsCollected = 0;
 }

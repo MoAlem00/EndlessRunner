@@ -11,6 +11,8 @@ public class ProfileSlot : MonoBehaviour
     [SerializeField] private Image thumbnailImage;
     
     private int slotIndex;
+    
+    public int SlotIndex => slotIndex;
 
     public void SetUp(int index)
     {
@@ -49,6 +51,7 @@ public class ProfileSlot : MonoBehaviour
         {
             ProfileManager.Instance.SaveProfileImmediate(slotIndex, "Player");
             ProfileManager.Instance.LoadProfile(slotIndex);
+            
         }
     }
 }
