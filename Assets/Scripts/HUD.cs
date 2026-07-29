@@ -15,6 +15,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private TMP_Text totalTimeText;
     [SerializeField] private Button pauseButton;
     [SerializeField] private TMP_Text distanceText;
+    [SerializeField] private TMP_Text totalDistanceText;
 
 
     void Start()
@@ -68,6 +69,7 @@ public class HUD : MonoBehaviour
         {
             finalScoreText.text = "SCORE: " + Score.Instance.CurrentScore;
             totalTimeText.text  = "TIME: " + Mathf.FloorToInt(Score.Instance.TimeSinceStart) + " s";
+            totalDistanceText.text = "DISTANCE: " + Mathf.FloorToInt(DistanceTracker.Instance.GetDistance()) + " m";
         }
         pauseMenu.SetActive(state == GameState.Paused);
         pauseButton.interactable = state == GameState.Playing;
