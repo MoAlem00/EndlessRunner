@@ -17,3 +17,6 @@ MonoBehaviour:
   type: 1
   target: 3000
   rewardCoins: 350
+  rewardType: 3
+  upgradeAmount: 0
+  unlockThemeId: Space

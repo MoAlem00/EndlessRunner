@@ -1595,6 +1595,104 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &900000101
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 900000103}
+  - component: {fileID: 900000102}
+  m_Layer: 0
+  m_Name: AnalyticsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &900000102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900000101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fc3b7e8d2942f3a4d4c125cee4e707, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::AnalyticsManager
+--- !u!4 &900000103
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900000101}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &900000201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 900000203}
+  - component: {fileID: 900000202}
+  m_Layer: 0
+  m_Name: RewardUnlockManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &900000202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900000201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b44fd59af91470b91af54359517f6db, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::RewardUnlockManager
+  allGoals:
+  - {fileID: 11400000, guid: 5eb531dfd90c7014d8cb34bb692c7e8a, type: 2}
+  - {fileID: 11400000, guid: 930253d58b0f3934da86e569b490f9f6, type: 2}
+  - {fileID: 11400000, guid: c5fa3c211215e694891336c7cbccc72f, type: 2}
+  - {fileID: 11400000, guid: 2986e6a39a1456647be0e929c4ac819b, type: 2}
+  - {fileID: 11400000, guid: f98cfd7beb9cfa041a769fa83b2d4a82, type: 2}
+  - {fileID: 11400000, guid: d1b3eb15876d9b74ab2c91fd6360f631, type: 2}
+  - {fileID: 11400000, guid: 0683ca2f62b3d8842a3f9d7d792b6d16, type: 2}
+  - {fileID: 11400000, guid: 59297edff791ae541a7f3221897be3da, type: 2}
+  - {fileID: 11400000, guid: c83069a19d7767544b2225c1c8d8ccbd, type: 2}
+--- !u!4 &900000203
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900000201}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1606,3 +1704,5 @@ SceneRoots:
   - {fileID: 980535173}
   - {fileID: 78319061}
   - {fileID: 269512785}
+  - {fileID: 900000103}
+  - {fileID: 900000203}

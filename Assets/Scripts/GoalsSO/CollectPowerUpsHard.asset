@@ -17,3 +17,6 @@ MonoBehaviour:
   type: 2
   target: 30
   rewardCoins: 300
+  rewardType: 2
+  upgradeAmount: 0
+  unlockThemeId:
