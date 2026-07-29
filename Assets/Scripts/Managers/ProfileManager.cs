@@ -1,8 +1,16 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+[System.Serializable]
+public class GoalProgress
+{
+    public string goalId;
+    public int bestValue;
+    public bool claimed;
+}
 [Serializable]
 public class ProfileData
 {
@@ -18,6 +26,7 @@ public class ProfileData
     public string lastSavedUtc;
     public int lastRunSeed;
     public string themeId;
+    public List<GoalProgress> goalProgress = new List<GoalProgress>();
 }
 
 // How to use it:
@@ -166,9 +175,9 @@ public class ProfileManager : MonoBehaviour
             sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 1f),
             lastSavedUtc = DateTime.UtcNow.ToString("o"),
             lastRunSeed = currentSeed != 0 ? currentSeed : (existing != null ? existing.lastRunSeed : 0),
-            themeId = selectedTheme != null ? selectedTheme.themeName : (existing != null ? existing.themeId : "")
+            themeId = selectedTheme != null ? selectedTheme.themeName : (existing != null ? existing.themeId : ""),
+            goalProgress = (ActiveProfile != null) ? ActiveProfile.goalProgress:(existing != null ? existing.goalProgress : new List<GoalProgress>()),
         };
-
         try
         {
             Directory.CreateDirectory(GetProfileFolder());
@@ -178,6 +187,7 @@ public class ProfileManager : MonoBehaviour
         {
             Debug.LogError($"[ProfileManager] Failed to save profile {slotIndex}: {e.Message}");
         }
+        if(Score.Instance != null) Score.Instance.ResetCoins();
     }
 
     public bool LoadProfile(int slotIndex)
@@ -219,5 +229,15 @@ public class ProfileManager : MonoBehaviour
             Debug.LogError($"[ProfileManager] Failed to read profile {slotIndex}: {e.Message}");
             return null;
         }
+    }
+    
+    public void AddCoins(int amount)
+    {
+        ProfileData data = ReadProfileFromDisk(ActiveSlotIndex);
+        if (data == null) return;
+        data.totalCoins += amount;
+        if (ActiveProfile != null) data.goalProgress = ActiveProfile.goalProgress;
+        File.WriteAllText(GetJsonPath(ActiveSlotIndex), JsonUtility.ToJson(data, true));
+        if (ActiveProfile != null) { ActiveProfile.totalCoins = data.totalCoins; }
     }
 }

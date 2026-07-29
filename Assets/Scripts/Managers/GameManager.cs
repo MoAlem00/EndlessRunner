@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator ShowGameOverAfterDelay()
     {
+        GoalManager.Instance.CheckGoals();
         ProfileManager.Instance.SaveProfile(ProfileManager.Instance.ActiveSlotIndex);
         yield return new WaitForSeconds(2f);
         SetState(GameState.GameOver);
