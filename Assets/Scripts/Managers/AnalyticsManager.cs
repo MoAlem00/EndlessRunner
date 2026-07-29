@@ -3,6 +3,13 @@ using Unity.Services.Analytics;
 using Unity.Services.Core;
 using UnityEngine;
 
+// How to use it:
+// Simply call AnalyticsManager.Instance.* where "*" is the functions below:
+//   - LogRunStarted(difficulty, seed)       -> call when a run starts.
+//   - LogRunEnded(score, coins, distance)   -> call when the run ends.
+//   - LogRewardClaimed(source, amount)      -> call when a daily or goal reward is claimed.
+//   - LogGoalCompleted(goalId, rewardType)  -> call when a goal is claimed.
+//   - Session start and 100m milestones are tracked on their own, no need to call those.
 public class AnalyticsManager : MonoBehaviour
 {
     public static AnalyticsManager Instance;

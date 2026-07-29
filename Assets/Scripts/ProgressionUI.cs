@@ -1,5 +1,9 @@
 using UnityEngine;
 
+// How to use it:
+// Attach this to the Progression panel and assign goalSlotPrefab and content
+// in the Inspector. It builds one slot per goal the first time the panel is
+// enabled, then just refreshes the existing slots every time after that.
 public class ProgressionUI : MonoBehaviour
 {
     [SerializeField] private GameObject goalSlotPrefab;

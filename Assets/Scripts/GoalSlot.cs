@@ -2,6 +2,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// How to use it:
+// Attach this to the goal row prefab and assign the text, slider and button
+// fields in the Inspector (progressBar, claimButton and claimedLabel are
+// optional, safe to leave empty). ProgressionUI calls SetUp() once per goal,
+// and the claim button's OnClick should call OnClaimPressed().
 public class GoalSlot : MonoBehaviour
 {
     [SerializeField] private TMP_Text descriptionText;

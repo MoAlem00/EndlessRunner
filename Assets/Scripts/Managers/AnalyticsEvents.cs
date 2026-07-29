@@ -1,5 +1,11 @@
 using Unity.Services.Analytics;
 
+// How to use it:
+// This file is just the custom event definitions, one class per event.
+// AnalyticsManager is what actually creates and sends them, so you only need
+// to touch this file if you're adding a new event. If you add one, remember
+// to also add a matching schema on the Unity Dashboard or it'll show up as
+// invalid there.
 public class SessionStartEvent : Event
 {
     public SessionStartEvent() : base("session_start") { }

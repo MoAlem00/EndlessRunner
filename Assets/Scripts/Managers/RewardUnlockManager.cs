@@ -1,5 +1,13 @@
 using UnityEngine;
 
+// How to use it:
+// Simply call RewardUnlockManager.Instance.* where "*" is the functions below:
+//   - GetProgress(goalId)          -> current progress for a goal, 0/target if not started yet.
+//   - TryClaimGoal(goalId)         -> claims the goal if it's complete, gives the coin reward, returns true if it worked.
+//   - IsThemeUnlocked(themeName)   -> check this before letting the player pick a theme.
+//   - AllGoals                     -> full goal list, used by ProgressionUI to build the list.
+//   - CoinMultiplierBonus          -> extra coin percentage to apply when a run ends, e.g. 0.15 = +15%.
+//   - HasStartingShield            -> true if the player should start the run with a shield.
 public class RewardUnlockManager : MonoBehaviour
 {
     public static RewardUnlockManager Instance;
