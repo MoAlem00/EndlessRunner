@@ -17,11 +17,13 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-    }
-    void Start()
-    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
         currentType = (InputType)PlayerPrefs.GetInt("InputType");
         OnTypeChange?.Invoke(currentType);
     }
