@@ -5,7 +5,7 @@ public class DailyRewardManager : MonoBehaviour
 {
     public static DailyRewardManager Instance;
     [SerializeField] private int rewardAmount = 100;
-    [SerializeField] private int rewardHours = 24;
+    [SerializeField] private int rewardHours = 1; // must be 24 for testing!
 
     private void Awake()
     {
@@ -19,7 +19,7 @@ public class DailyRewardManager : MonoBehaviour
         if (string.IsNullOrEmpty(lastClaim)) return true;
 
         DateTime last = DateTime.Parse(lastClaim);
-        return (DateTime.Now - last).TotalHours >= rewardHours;
+        return (DateTime.Now - last).TotalMinutes >= rewardHours;
     }
 
     public void ClaimReward()
