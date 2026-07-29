@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private bool wasGrounded;
     [SerializeField] AudioClip concreteHitSound;
     [SerializeField] AudioClip landingSound;
-    public static event Action<GameObject> OnHitObstacle; 
+    public static event Action<GameObject> OnHitObstacle;
     /// <summary>Percentage of the screen width to consider when swiping to be considered a swipe, else its a jump.</summary> 
     const float X_SWIPE_DEAD_ZONE_PERCENTAGE = 0.05f;
 
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
     private Dictionary<PowerUpType, float> effectEndTimes = new();
 
-    [SerializeField] private Vector3 magnetSize = new Vector3(15,5,5);
+    [SerializeField] private Vector3 magnetSize = new Vector3(15, 5, 5);
 
     void Awake()
     {
@@ -45,6 +45,9 @@ public class PlayerController : MonoBehaviour
         Health.Instance.OnDeath += HandleDeath;
         stumbleSpeed = speed / 2;
         normalSpeed = speed;
+
+        if (RewardUnlockManager.Instance != null && RewardUnlockManager.Instance.HasStartingShield)
+            AddEffect(PowerUpType.Invulnerable, 15f);
     }
 
     private void OnEnable()
@@ -66,10 +69,10 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
 
-        if(!Score.Instance.isDoubleScore && HasEffect(PowerUpType.Multiplier) ||
+        if (!Score.Instance.isDoubleScore && HasEffect(PowerUpType.Multiplier) ||
          Score.Instance.isDoubleScore && !HasEffect(PowerUpType.Multiplier))
             Score.Instance.ToggleDoubleScore();
-        
+
 
         if (effectEndTimes.Count > 0)
         {
@@ -119,7 +122,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.Instance.IsPlaying()) return;
         MovePlayer();
-        if(HasEffect(PowerUpType.Magnetic)) Attract();
+        if (HasEffect(PowerUpType.Magnetic)) Attract();
     }
 
     void Attract()
@@ -129,7 +132,7 @@ public class PlayerController : MonoBehaviour
         int i = 0;
         while (i < hitColliders.Length)
         {
-            if(hitColliders[i].CompareTag("Coin"))
+            if (hitColliders[i].CompareTag("Coin"))
             {
                 Transform trans = hitColliders[i].gameObject.transform;
                 trans.position = Vector3.MoveTowards(trans.position, gameObject.transform.position, 30 * Time.deltaTime);
@@ -244,7 +247,7 @@ public class PlayerController : MonoBehaviour
             effect.transform.position = other.transform.position;
             effect.GetComponent<ReturnEffectToPool>().pool = effectPooler;
             effect.GetComponent<ParticleSystem>().Play();
-            AudioManager.Instance.PlaySfx(concreteHitSound,0.5f);
+            AudioManager.Instance.PlaySfx(concreteHitSound, 0.5f);
 
             if (!HasEffect(PowerUpType.Invulnerable))
                 StartCoroutine(HandleObstacleHit());
