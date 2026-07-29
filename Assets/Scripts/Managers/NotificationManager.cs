@@ -23,6 +23,7 @@ public class NotificationManager : MonoBehaviour
     {
 #if UNITY_ANDROID
         RegisterChannel();
+        new PermissionRequest();
 #endif
     }
     
@@ -47,7 +48,8 @@ public class NotificationManager : MonoBehaviour
         {
             Title = "Daily Reward Ready!",
             Text = "Your daily reward is waiting. Come collect it!",
-            FireTime = System.DateTime.Now.AddHours(24),
+            FireTime = System.DateTime.Now.AddMinutes(1), // should be 24 hours!
+            SmallIcon = "icon_0",
         };
 
         AndroidNotificationCenter.SendNotification(notification, "daily_reward");
