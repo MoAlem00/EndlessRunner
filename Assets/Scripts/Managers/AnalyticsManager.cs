@@ -2,6 +2,7 @@ using System;
 using Unity.Services.Analytics;
 using Unity.Services.Core;
 using UnityEngine;
+using Event = Unity.Services.Analytics.Event;
 
 // How to use it:
 // Simply call AnalyticsManager.Instance.* where "*" is the functions below:
@@ -34,7 +35,12 @@ public class AnalyticsManager : MonoBehaviour
         try
         {
             await UnityServices.InitializeAsync();
+            // Obsolete in favor of EndUserConsent.SetConsentState, which needs a framework we don't have.
+            // This is still the documented way to start collection for this package version without one.
+            // For now, suppressed.
+#pragma warning disable CS0618
             AnalyticsService.Instance.StartDataCollection();
+#pragma warning restore CS0618
             isReady = true;
             LogSessionStart();
         }

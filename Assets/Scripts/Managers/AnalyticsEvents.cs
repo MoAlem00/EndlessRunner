@@ -1,4 +1,6 @@
-using Unity.Services.Analytics;
+// UnityEngine also has a class called Event (the old IMGUI one), so alias
+// this one to keep "Event" pointing at the Analytics type below.
+using Event = Unity.Services.Analytics.Event;
 
 // How to use it:
 // This file is just the custom event definitions, one class per event.
