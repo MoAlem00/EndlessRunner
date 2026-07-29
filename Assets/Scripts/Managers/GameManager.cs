@@ -22,6 +22,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         gameState = GameState.Playing;
+
+        string difficulty = ((DifficultyType)PlayerPrefs.GetInt("ChosenDifficulty", 0)).ToString();
+        int seed = ProfileManager.Instance != null ? ProfileManager.Instance.currentSeed : 0;
+        AnalyticsManager.Instance?.LogRunStarted(difficulty, seed);
     }
 
     public void GoToMainMenu()
@@ -42,6 +46,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator ShowGameOverAfterDelay()
     {
         GoalManager.Instance.CheckGoals();
+        AnalyticsManager.Instance?.LogRunEnded(Score.Instance.CurrentScore, Score.Instance.CoinsCollected, DistanceTracker.Instance.GetDistance());
         ProfileManager.Instance.SaveProfile(ProfileManager.Instance.ActiveSlotIndex);
         yield return new WaitForSeconds(2f);
         SetState(GameState.GameOver);
@@ -49,26 +54,26 @@ public class GameManager : MonoBehaviour
 
     public void QuitGame()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         ProfileManager.Instance.OnApplicationQuit();
         UnityEditor.EditorApplication.isPlaying = false;
-        #else
+#else
         ProfileManager.Instance.OnApplicationQuit();
         Application.Quit();
-        #endif
+#endif
     }
 
     public void RestartGame()
     {
         SceneManager.LoadScene("MoAlemScene");
     }
-    
+
     public void PauseGame()
     {
         SetState(GameState.Paused);
         Time.timeScale = 0f;
     }
-    
+
     public void ResumeGame()
     {
         SetState(GameState.Playing);

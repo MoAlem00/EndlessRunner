@@ -71,9 +71,9 @@ public class ProfileManager : MonoBehaviour
         // so autosave captures and writes synchronously instead of via SaveProfile().
         SaveProfileImmediate(ActiveSlotIndex);
     }
-    
+
     public void SelectTheme(Theme theme) => selectedTheme = theme;
-    
+
     private Theme FindThemeById(string id)
     {
         foreach (Theme t in allThemes)
@@ -85,14 +85,14 @@ public class ProfileManager : MonoBehaviour
         currentSeed = System.DateTime.Now.GetHashCode();
         if (ActiveProfile != null) ActiveProfile.lastRunSeed = currentSeed;
     }
-    
+
     public void ReplayLastRun()
     {
         currentSeed = (ActiveProfile != null && ActiveProfile.lastRunSeed != 0)
             ? ActiveProfile.lastRunSeed
             : System.DateTime.Now.GetHashCode();
     }
-    
+
     public static string GetProfileFolder() => Path.Combine(Application.persistentDataPath, "Profiles");
     private static string GetJsonPath(int slotIndex) => Path.Combine(GetProfileFolder(), $"profile_{slotIndex}.json");
     private static string GetScreenshotPath(int slotIndex) => Path.Combine(GetProfileFolder(), $"profile_{slotIndex}.png");
@@ -162,12 +162,15 @@ public class ProfileManager : MonoBehaviour
         int currentCoins = Score.Instance != null ? Score.Instance.CoinsCollected : 0;
         float currentDistance = DistanceTracker.Instance != null ? DistanceTracker.Instance.GetDistance() : 0f;
 
+        float coinMultiplier = 1f + (RewardUnlockManager.Instance != null ? RewardUnlockManager.Instance.CoinMultiplierBonus : 0f);
+        int bonusedCoins = Mathf.RoundToInt(currentCoins * coinMultiplier);
+
         ProfileData data = new ProfileData
         {
             slotIndex = slotIndex,
             profileName = !string.IsNullOrEmpty(profileName) ? profileName : (existing != null ? existing.profileName : "Player"),
             highScore = Mathf.Max(existing != null ? existing.highScore : 0, currentScore),
-            totalCoins = (existing != null ? existing.totalCoins : 0) + currentCoins,
+            totalCoins = (existing != null ? existing.totalCoins : 0) + bonusedCoins,
             bestDistance = Mathf.Max(existing != null ? existing.bestDistance : 0f, currentDistance),
             chosenDifficulty = PlayerPrefs.GetInt("ChosenDifficulty", 0),
             chosenInputType = PlayerPrefs.GetInt("InputType", 0),
@@ -176,7 +179,7 @@ public class ProfileManager : MonoBehaviour
             lastSavedUtc = DateTime.UtcNow.ToString("o"),
             lastRunSeed = currentSeed != 0 ? currentSeed : (existing != null ? existing.lastRunSeed : 0),
             themeId = selectedTheme != null ? selectedTheme.themeName : (existing != null ? existing.themeId : ""),
-            goalProgress = (ActiveProfile != null) ? ActiveProfile.goalProgress:(existing != null ? existing.goalProgress : new List<GoalProgress>()),
+            goalProgress = (ActiveProfile != null) ? ActiveProfile.goalProgress : (existing != null ? existing.goalProgress : new List<GoalProgress>()),
         };
         try
         {
@@ -187,7 +190,7 @@ public class ProfileManager : MonoBehaviour
         {
             Debug.LogError($"[ProfileManager] Failed to save profile {slotIndex}: {e.Message}");
         }
-        if(Score.Instance != null) Score.Instance.ResetCoins();
+        if (Score.Instance != null) Score.Instance.ResetCoins();
     }
 
     public bool LoadProfile(int slotIndex)
@@ -230,7 +233,7 @@ public class ProfileManager : MonoBehaviour
             return null;
         }
     }
-    
+
     public void AddCoins(int amount)
     {
         ProfileData data = ReadProfileFromDisk(ActiveSlotIndex);
