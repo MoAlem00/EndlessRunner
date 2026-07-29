@@ -13,8 +13,8 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         UpdateCoinsDisplay();
-        StartCoroutine(AudioManager.Instance.PlayShuffleMusic());
-        rewardPanel.SetActive(DailyRewardManager.Instance.IsRewardAvailable());
+        if (AudioManager.Instance != null) StartCoroutine(AudioManager.Instance.PlayShuffleMusic());
+        rewardPanel.SetActive(DailyRewardManager.Instance != null && DailyRewardManager.Instance.IsRewardAvailable());
     }
     public void StartGame()
     {
@@ -44,7 +44,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnClaimPressed()
     {
-        DailyRewardManager.Instance.ClaimReward();
+        if (DailyRewardManager.Instance != null) DailyRewardManager.Instance.ClaimReward();
         rewardPanel.SetActive(false);
         UpdateCoinsDisplay();
     }
@@ -64,7 +64,8 @@ public class MainMenu : MonoBehaviour
 
     private void UpdateCoinsDisplay()
     {
-        int coins = ProfileManager.Instance.ActiveProfile != null
+        Debug.Log(ProfileManager.Instance);
+        int coins = ProfileManager.Instance?.ActiveProfile != null
             ? ProfileManager.Instance.ActiveProfile.totalCoins
             : 0;
         coinsText.text = coins.ToString();
