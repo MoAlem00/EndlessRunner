@@ -42,6 +42,7 @@ public class ProfileData
 public class ProfileManager : MonoBehaviour
 {
     public const int MaxProfileSlots = 3;
+    private const string LastActiveSlotKey = "LastActiveProfileSlot";
     public Theme selectedTheme;
     [SerializeField] private Theme defaultTheme;
     [SerializeField] private Theme[] allThemes;
@@ -58,6 +59,12 @@ public class ProfileManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             Directory.CreateDirectory(GetProfileFolder());
+
+            // No profile explicitly selected yet this session (e.g. ProfileSelection was skipped)
+            // fall back to whichever slot was last used, defaulting to slot 0.
+            int fallbackSlot = PlayerPrefs.GetInt(LastActiveSlotKey, 0);
+            ActiveSlotIndex = fallbackSlot;
+            LoadProfile(fallbackSlot);
         }
         else
         {
@@ -100,7 +107,11 @@ public class ProfileManager : MonoBehaviour
     /// Check if it exists
     public bool DoesProfileExist(int slotIndex) => File.Exists(GetJsonPath(slotIndex));
 
-    public void SetActiveSlot(int slotIndex) => ActiveSlotIndex = slotIndex;
+    public void SetActiveSlot(int slotIndex)
+    {
+        ActiveSlotIndex = slotIndex;
+        PlayerPrefs.SetInt(LastActiveSlotKey, slotIndex);
+    }
 
     /// For reading data and previewing it.
     public ProfileData PeekProfile(int slotIndex) => ReadProfileFromDisk(slotIndex);
