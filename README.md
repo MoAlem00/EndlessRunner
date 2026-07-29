@@ -2,15 +2,14 @@
 
 This is our submission for Task 4 (Final Mobile Integration & Advanced Systems). The game is an endless runner with profiles, themes, difficulty settings, power ups, a daily reward system, and a goals and progression system on top.
 
+**Credits:**
+
+- Mohammad Alem
+- Sami Shakkour
+
 ## Advanced feature we chose
 
 We went with Option 4, Game Goals & Progression System. The idea is to give the game a sense of long term progress instead of just an endless loop. Players have goals like collecting a certain number of coins in a run, collecting power ups, or reaching a distance, and completing them gives a coin reward. Some of the harder goals also unlock a permanent upgrade that sticks with the player across every future run, like a coin bonus, a starting shield, or a new theme.
-
-## How we split the work
-
-Student A built the GoalManager and the data side of the progression system. That means the Goal scriptable objects, the logic that checks a run's stats against each goal's target while you're playing, and the save and load code that keeps track of goal progress across sessions inside the player's profile. Student A also built the Daily Reward System, so the local notification that reminds a player to come back, and the claim screen that gives them a reward when they open the app.
-
-Student B (me) built the Unity Analytics integration and the other half of the progression system, the Progression UI and the Reward Unlock logic. That covers the screen that shows every goal with its progress and a claim button, and the manager that decides what a claimed goal actually gives the player permanently, whether that's more coins, a shield at the start of a run, or a theme that was previously locked.
 
 ## Unity Analytics
 
