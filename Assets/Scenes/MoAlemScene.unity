@@ -2089,6 +2089,7 @@ MonoBehaviour:
   jumpForce: 7
   concreteHitSound: {fileID: 8300000, guid: 1fb590c346de1c64d8cc3f5f4688e606, type: 3}
   landingSound: {fileID: 8300000, guid: 9868e798311ff9241802074170dc9891, type: 3}
+  X_SWIPE_DEAD_ZONE_PERCENTAGE: 0.015
   magnetSize: {x: 15, y: 5, z: 5}
 --- !u!136 &333502642
 CapsuleCollider:
@@ -7260,7 +7261,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1548983315}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b9abcdda9caf854b939149ad04b2d47, type: 3}
   m_Name: 
@@ -8116,6 +8117,7 @@ MonoBehaviour:
   totalTimeText: {fileID: 1768681388}
   pauseButton: {fileID: 1132675410}
   distanceText: {fileID: 2042847380}
+  totalDistanceText: {fileID: 499248415}
 --- !u!114 &1652263530
 MonoBehaviour:
   m_ObjectHideFlags: 0
