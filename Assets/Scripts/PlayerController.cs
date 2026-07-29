@@ -24,8 +24,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioClip concreteHitSound;
     [SerializeField] AudioClip landingSound;
     public static event Action<GameObject> OnHitObstacle;
-    /// <summary>Percentage of the screen width to consider when swiping to be considered a swipe, else its a jump.</summary> 
-    const float X_SWIPE_DEAD_ZONE_PERCENTAGE = 0.05f;
+    /// <summary>Percentage of the screen width to consider when swiping to be considered a swipe, else its a jump.</summary>
+    [SerializeField, Range(0.005f, 0.1f)] private float X_SWIPE_DEAD_ZONE_PERCENTAGE = 0.015f;
 
     private bool touchStartedInGame;
     private Vector2 startTouchPosition, endTouchPosition;
@@ -85,36 +85,38 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (InputManager.Instance.CurrentType == InputType.Swipe)
+        if (InputManager.Instance.CurrentType == InputType.Swipe && Touch.activeTouches.Count > 0)
         {
-            foreach (var touch in Touch.activeTouches)
+            var touch = Touch.activeTouches[0];
+
+            // foreach (var touch in Touch.activeTouches)
+            // {
+            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
             {
-                if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
-                {
-                    if (!GameManager.Instance.IsPlaying()) continue;
+                if (!GameManager.Instance.IsPlaying()) return;
 
-                    touchStartedInGame = true;
-                    startTouchPosition = touch.screenPosition;
-                }
-
-                if (touch.phase == UnityEngine.InputSystem.TouchPhase.Ended)
-                {
-                    if (!touchStartedInGame) continue;
-
-                    touchStartedInGame = false;
-                    endTouchPosition = touch.screenPosition;
-
-                    float deadZone = Screen.width * X_SWIPE_DEAD_ZONE_PERCENTAGE;
-                    float distance = Mathf.Abs(endTouchPosition.x - startTouchPosition.x);
-
-                    if (distance <= deadZone)
-                        Jump();
-                    else if (endTouchPosition.x < startTouchPosition.x)
-                        MoveLeft();
-                    else
-                        MoveRight();
-                }
+                touchStartedInGame = true;
+                startTouchPosition = touch.screenPosition;
             }
+
+            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Ended)
+            {
+                if (!touchStartedInGame) return;
+
+                touchStartedInGame = false;
+                endTouchPosition = touch.screenPosition;
+
+                float deadZone = Screen.width * X_SWIPE_DEAD_ZONE_PERCENTAGE;
+                float deltaX = endTouchPosition.x - startTouchPosition.x;
+
+                if (Mathf.Abs(deltaX) <= deadZone)
+                    Jump();
+                else if (deltaX < 0)
+                    MoveLeft();
+                else
+                    MoveRight();
+            }
+            // }
         }
     }
 
