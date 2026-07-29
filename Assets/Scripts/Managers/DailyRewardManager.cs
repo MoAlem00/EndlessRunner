@@ -17,7 +17,7 @@ public class DailyRewardManager : MonoBehaviour
     {
         string lastClaim = PlayerPrefs.GetString("LastRewardClaim", "");
         if (string.IsNullOrEmpty(lastClaim)) return true;
-        
+
         DateTime last = DateTime.Parse(lastClaim);
         return (DateTime.Now - last).TotalHours >= rewardHours;
     }
@@ -26,5 +26,6 @@ public class DailyRewardManager : MonoBehaviour
     {
         ProfileManager.Instance.AddCoins(rewardAmount);
         PlayerPrefs.SetString("LastRewardClaim", DateTime.Now.ToString("o"));
+        AnalyticsManager.Instance?.LogRewardClaimed("daily", rewardAmount);
     }
 }
