@@ -120,4 +120,29 @@ public class RewardUnlockManager : MonoBehaviour
         profile.goalProgress.Add(created);
         return created;
     }
+    
+    public void CheckGoals()
+    {
+        if (ProfileManager.Instance.ActiveProfile == null) return;
+        foreach (Goal goal in allGoals)
+        {
+            int runValue = GetRunValue(goal.type);
+            GoalProgress progress = FindOrCreateProgress(ProfileManager.Instance.ActiveProfile, goal.goalId);
+
+            if (runValue > progress.bestValue)
+                progress.bestValue = runValue;
+        }
+        
+    }
+    
+    private int GetRunValue(GoalType type)
+    {
+        switch (type)
+        {
+            case GoalType.CoinsInRun:     return Score.Instance.CoinsCollected;
+            case GoalType.DistanceInRun:  return Mathf.FloorToInt(DistanceTracker.Instance.GetDistance());
+            case GoalType.PowerUpsInRun:  return Score.Instance.PowerUpsCollected;
+            default: return 0;
+        }
+    }
 }
