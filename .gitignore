@@ -92,6 +92,11 @@ crashlytics-build.properties
 # TestRunner generated files
 InitTestScene*.unity*
 
+# auto-generated files for builds
+/[Aa]ssets/[Rr]esources/PerformanceTestRunInfo.json*
+/[Aa]ssets/[Rr]esources/PerformanceTestRunSettings.json*
+/[Aa]ssets/[Rr]esources.meta
+
 # Addressables default ignores, before user customizations
 /ServerData
 /[Aa]ssets/StreamingAssets/aa*
