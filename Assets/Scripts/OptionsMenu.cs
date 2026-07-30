@@ -8,6 +8,7 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField] private GameObject optionsPanel;
     [SerializeField] private Image[] difficultyButtons;
     [SerializeField] private Image[] InputButtons;
+    [SerializeField] private GameObject goalsPanel;
     private readonly Color selectedColor = Color.gray; 
     private readonly Color normalColor = Color.white;
     
@@ -48,5 +49,8 @@ public class OptionsMenu : MonoBehaviour
         DifficultyManager.Instance.SelectDifficulty(type);
         UpdateButtonVisuals(type);
     }
+    
+    public void OpenGoals() => goalsPanel.SetActive(true);
+    public void CloseGoals() => goalsPanel.SetActive(false);
     
 }

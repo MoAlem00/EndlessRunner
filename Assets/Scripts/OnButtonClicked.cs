@@ -6,13 +6,13 @@ public class OnButtonClicked : MonoBehaviour
     public void OnStartPressed()
     {
         ProfileManager.Instance.StartNewRun();
-        SceneManager.LoadScene("MoAlemScene");
+        SceneManager.LoadScene("GameScene");
     }
 
     public void OnReplayPressed()
     {
         ProfileManager.Instance.ReplayLastRun();
-        SceneManager.LoadScene("MoAlemScene");
+        SceneManager.LoadScene("GameScene");
     }
 
     public void OnNextPressed()

@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainScene.unity
     guid: b458b830686d3974f9674abdb25dc621
   - enabled: 1
-    path: Assets/Scenes/MoAlemScene.unity
+    path: Assets/Scenes/GameScene.unity
     guid: 9e0c668737e2c6d4a9ad9ac10bf6b938
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

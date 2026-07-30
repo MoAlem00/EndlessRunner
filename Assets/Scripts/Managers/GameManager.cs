@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator ShowGameOverAfterDelay()
     {
-        GoalManager.Instance.CheckGoals();
+        RewardUnlockManager.Instance.CheckGoals();
         AnalyticsManager.Instance?.LogRunEnded(Score.Instance.CurrentScore, Score.Instance.CoinsCollected, DistanceTracker.Instance.GetDistance());
         ProfileManager.Instance.SaveProfile(ProfileManager.Instance.ActiveSlotIndex);
         yield return new WaitForSeconds(2f);
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MoAlemScene");
+        SceneManager.LoadScene("GameScene");
     }
 
     public void PauseGame()
