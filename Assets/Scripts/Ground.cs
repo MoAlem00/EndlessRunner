@@ -50,7 +50,7 @@ public class Ground : MonoBehaviour
     
     public bool TryClearObstacle(GameObject obstacle)
     {
-        if (currentCollectable != obstacle) return false;
+        if (currentObstacle != obstacle) return false;
         currentObstacle = null;
         return true;
     }
